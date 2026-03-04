@@ -1,0 +1,47 @@
+DEMO CALL TRANSCRIPT — BlueSky HVAC Services
+Date: 2024-11-18  |  Duration: 19 min  |  Participants: Jordan Price (Clara Sales), Thomas Buell (BlueSky Owner)
+
+---
+
+JORDAN: Thomas, tell me about your business.
+
+THOMAS: We do commercial HVAC — rooftop units, chillers, boilers. Mostly commercial buildings, some light industrial. Based in Phoenix. I have six techs and a lot of after-hours calls when AC goes down in summer. In Phoenix that's not optional, it's an emergency.
+
+JORDAN: So heat-related failures are your main emergency category?
+
+THOMAS: Anything where the building is uncomfortable or at risk. A restaurant with a walk-in cooler down — that's an emergency. A school with no cooling in August — emergency. Office building AC out on a Monday morning — emergency. Server room overheating — definitely.
+
+JORDAN: And non-emergency?
+
+THOMAS: Routine maintenance calls, filter replacements, scheduling seasonal check-ups. Also quotes for new installs.
+
+JORDAN: What are your business hours?
+
+THOMAS: We're open Monday through Friday, 7am to 5pm. Mountain time. Our shop is in Tempe, Arizona. But during summer — May through September — we also do limited Saturday hours, 8am to noon.
+
+JORDAN: That's interesting — seasonal hours. We can build that in. Who handles after-hours calls?
+
+THOMAS: I have two on-call techs on rotation — they swap weekly. I also have a dispatch coordinator, Pam, who I want involved before the tech. Actually, Pam handles routing. She decides who goes where.
+
+JORDAN: Do you have a preference on transfer order? Pam first, then tech?
+
+THOMAS: Yes. Always Pam first. If Pam doesn't answer in 30 seconds, go to the on-call tech. And I mean 30 seconds — we've had customers give up.
+
+JORDAN: Noted. Any software integrations?
+
+THOMAS: We use ServiceTitan. Clara should not create work orders — Pam does that.
+
+JORDAN: Got it. Anything else?
+
+THOMAS: Yeah — we have a big client, Pinnacle Hotels. They have a separate priority line. I don't know if that's something Clara can handle but I wanted to flag it.
+
+JORDAN: We can create a VIP routing rule for specific callers. We'll work that out during onboarding.
+
+[Demo interaction — 7 minutes]
+
+THOMAS: Short and professional. That's what I want. My guys are busy people, callers are stressed — don't waste anyone's time.
+
+JORDAN: Perfect. We'll make it efficient.
+
+---
+END OF TRANSCRIPT

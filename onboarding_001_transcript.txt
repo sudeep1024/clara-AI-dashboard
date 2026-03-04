@@ -1,0 +1,65 @@
+ONBOARDING CALL TRANSCRIPT — FireGuard Protection Services
+Date: 2024-12-03  |  Duration: 44 min  |  Participants: Lisa Cheng (Clara Onboarding), Diana Cho (FireGuard Operations Manager), Brett Simmons (FireGuard Lead Tech)
+
+---
+
+LISA: Welcome, Diana and Brett. Today we're going to nail down everything we need to configure your Clara agent. Let's start with confirming your business hours.
+
+DIANA: Monday through Friday, 8am to 5pm Central. We're closed on federal holidays.
+
+LISA: Perfect. And your office address?
+
+DIANA: 2847 Rowlett Road, Garland, Texas 75043.
+
+LISA: Got it. Now let's talk about emergency definitions. What exactly triggers an emergency for your callers?
+
+DIANA: Active sprinkler discharge — any water coming out of a head that shouldn't be. Fire alarm signal showing a live condition on a panel. Smoke smell reported at a site. Flooding from a pipe failure related to our systems. Fire panel fault showing a zone in alarm.
+
+BRETT: Also — carbon monoxide alarm in a building we maintain. That gets routed the same way.
+
+LISA: Good. And non-emergency?
+
+DIANA: Annual inspection scheduling, requests for quotes, billing questions, requests to schedule testing of a system, callback requests.
+
+LISA: Now for routing. Walk me through the escalation path for emergencies.
+
+DIANA: First, try our dispatch line — that's our answering service. The number is 972-555-0148. If they don't answer in 45 seconds, call Brett's cell. Brett, can you give your number?
+
+BRETT: 972-555-0291.
+
+DIANA: If Brett doesn't answer in 45 seconds, call me. My cell is 972-555-0067.
+
+LISA: And if all three fail?
+
+DIANA: Send a text to all three numbers with the caller's information and log it. Then tell the caller that the on-call team has been alerted and will call them back within 15 minutes.
+
+LISA: Good. How long do you want the transfer attempts to be?
+
+DIANA: 45 seconds per attempt. No retries on each number — move to the next one after 45 seconds.
+
+LISA: What should Clara say if the transfer fails?
+
+DIANA: "I was unable to reach our on-call team directly, but I've sent them your information and they'll call you back within 15 minutes. Please keep your phone nearby."
+
+LISA: Perfect. Non-emergency after hours?
+
+DIANA: Collect name, number, brief description, and tell them we'll follow up next business day. No escalation.
+
+LISA: ServiceTrade constraints?
+
+DIANA: Never create a sprinkler job order directly from a Clara call. All jobs must go through our estimating team. Extinguisher work is okay, but not sprinkler or alarm panel work.
+
+BRETT: Also, never quote prices. We get that a lot.
+
+LISA: Noted. Any special callers or accounts?
+
+DIANA: We have three big accounts — Lone Star Brewery, DFW Airport Cargo (one warehouse), and Garland ISD. If any of those call about an emergency, go straight to me first — skip the dispatch line.
+
+LISA: I'll note those as VIP accounts. Last question — languages?
+
+DIANA: We do have Spanish-speaking customers but the Clara Spanish option isn't available yet, so English only for now. Just note it.
+
+LISA: That wraps it up. I'll have your v2 agent ready within 24 hours for your review.
+
+---
+END OF TRANSCRIPT

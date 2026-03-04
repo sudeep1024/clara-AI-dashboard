@@ -1,0 +1,73 @@
+ONBOARDING CALL TRANSCRIPT — BlueSky HVAC Services
+Date: 2024-12-09  |  Duration: 41 min  |  Participants: Lisa Cheng (Clara Onboarding), Thomas Buell (Owner), Pam Nguyen (Dispatch Coordinator)
+
+---
+
+LISA: Thomas, Pam — let's get the full config locked down. Hours first.
+
+THOMAS: Standard: Monday through Friday, 7am to 5pm Mountain time. And May 1 through September 30, we also do Saturdays 8am to noon, Mountain time.
+
+LISA: Office address?
+
+THOMAS: 901 S Mill Avenue, Suite 110, Tempe, Arizona 85281.
+
+LISA: Services?
+
+THOMAS: Commercial HVAC repair and maintenance. Chiller and boiler service. Rooftop unit repair. Preventive maintenance contracts. New commercial installs.
+
+LISA: Emergency definition?
+
+PAM: Complete cooling failure in an occupied commercial building. Server room overheating — any call mentioning a server room with temperature rising is immediate. Walk-in cooler or freezer failure at a food service location. Boiler failure in winter when the building is occupied.
+
+THOMAS: Also gas smell near HVAC equipment — that's safety-critical, tell them to evacuate and call the gas company first, then we send a tech.
+
+LISA: Important note — so for gas smell, direct them to call utility/911 first, THEN route to you?
+
+THOMAS: Exactly. Don't delay that. Safety first.
+
+LISA: Routing chain?
+
+PAM: Always me first. My cell is 480-555-0193. 30-second window. Then the on-call tech — but the on-call tech rotates weekly. I'll send you the rotation schedule by email separately so you can update it.
+
+LISA: Understood — I'll document that the tech number is variable and Pam provides the current rotation. If Pam doesn't answer?
+
+PAM: Try the on-call tech directly. If he doesn't answer either, send me a text and email at pam@blueskyaz.com with full caller details. And tell the customer we'll call back within 20 minutes.
+
+THOMAS: And Pam — can you give the on-call tech this week for the initial config?
+
+PAM: This week it's Carlos. 480-555-0276.
+
+LISA: Got it. Transfer timeout?
+
+PAM: 30 seconds. Don't let it ring more than that.
+
+LISA: Fail message?
+
+PAM: "I was unable to reach our on-call team directly. I've sent them your information and someone will call you within 20 minutes. Please stay near your phone."
+
+LISA: ServiceTitan constraints?
+
+THOMAS: Don't create work orders from calls. Pam does all that. Don't promise any arrival windows. Don't tell customers what parts cost — we quote after diagnosis.
+
+PAM: Also our Pinnacle Hotels client — that was mentioned in the demo. They have 6 properties. Any call from a Pinnacle Hotels property number should go directly to Thomas's cell, not to me first.
+
+THOMAS: My cell is 480-555-0041.
+
+LISA: I'll set Pinnacle Hotels as a VIP route. Do you have a list of their calling numbers?
+
+PAM: I'll email you the 6 property numbers after this call.
+
+LISA: Perfect. Non-emergency after hours?
+
+PAM: Collect name, number, company name, and brief description. Tell them we'll respond next business day. If it's Saturday during our summer hours, someone might call back same day.
+
+LISA: Got it. Anything else?
+
+THOMAS: Yeah — if someone mentions a large job like a new install or a full system replacement, Clara shouldn't try to handle that at all. Just get name and number and flag it for my sales team.
+
+LISA: Noted. Anything else?
+
+PAM: I think that covers it.
+
+---
+END OF TRANSCRIPT

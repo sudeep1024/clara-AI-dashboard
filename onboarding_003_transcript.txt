@@ -1,0 +1,63 @@
+ONBOARDING CALL TRANSCRIPT — AlarmTech Security Systems
+Date: 2024-12-07  |  Duration: 52 min  |  Participants: Lisa Cheng (Clara Onboarding), Sandra Reeves (Director of Operations), Mike Tsang (Lead Technician)
+
+---
+
+LISA: Sandra, Mike — let's work through every configuration detail. Hours first.
+
+SANDRA: Monday through Friday, 8am to 5:30pm Eastern.
+
+LISA: Address?
+
+SANDRA: 3100 Piedmont Road NE, Suite 200, Atlanta, Georgia 30305.
+
+LISA: Services?
+
+SANDRA: Fire alarm installation and monitoring, burglar alarm installation and monitoring, access control, CCTV. We also do annual inspections for all of those.
+
+LISA: Emergency definition?
+
+SANDRA: Live alarm signal from a monitored account. Customer reports break-in in progress or has confirmed a fire. Tech needed tonight for a malfunctioning system that's causing false alarms — that's an emergency because repeated false alarms can lead to fines.
+
+MIKE: Also if a customer's panel is offline and their building is unprotected. That's urgent — usually a power issue.
+
+SANDRA: Good point. Add that.
+
+LISA: Routing chain for emergencies?
+
+SANDRA: First try our monitoring coordinator — her name is Priya, number is 404-555-0217. Wait 40 seconds. Then try Mike, 404-555-0382. Wait 40 seconds. Then our backup coordinator, James, 404-555-0459. If all three fail, take a detailed message and send an email alert to ops@alarmtechsystems.com.
+
+LISA: Transfer timeout — 40 seconds per attempt, confirmed?
+
+SANDRA: Yes.
+
+LISA: Message if all transfers fail?
+
+SANDRA: "I was unable to reach our on-call team right now. I have your information and our operations team has been notified by alert. Someone will contact you within 20 minutes."
+
+LISA: Non-emergency after hours?
+
+SANDRA: Collect name, number, account number if they have it, brief description. Confirm follow-up next business day.
+
+LISA: Software constraints?
+
+SANDRA: Clara must never promise to create a ticket in ServiceMax — say "our team will follow up." Also, never confirm monitoring status over the phone — we don't give out whether an account is being monitored for security reasons.
+
+MIKE: And never give out technician cell numbers to customers. Route everything through the system.
+
+LISA: Good. Any special accounts?
+
+SANDRA: Yes — Hartsfield Corporate Park is a large account, about 40 buildings. If anyone from Hartsfield calls about an emergency, treat it as critical priority and go directly to Mike first, not Priya.
+
+LISA: I'll flag that. Any other nuances?
+
+SANDRA: We also need Clara to handle calls where someone is testing their alarm. They should say they're testing and Clara should note it but not escalate. Those come in during business hours.
+
+LISA: Perfect. That covers the major items. Anything else?
+
+SANDRA: One thing — we sometimes get calls from the fire department asking to verify an alarm. Clara should take their info and say our monitoring center will be in contact. Don't try to confirm anything.
+
+LISA: Noted. I'll configure that. You'll have your v2 in 24 hours.
+
+---
+END OF TRANSCRIPT

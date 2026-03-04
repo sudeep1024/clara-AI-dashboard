@@ -1,0 +1,280 @@
+{
+  "account_id": "ACC-005",
+  "generated_at": "2026-03-04T05:28:29.038779+00:00",
+  "summary": {
+    "memo_fields_changed": 18,
+    "spec_fields_changed": 9,
+    "system_prompt_changed": true,
+    "total_changes": 28
+  },
+  "memo_changes": [
+    {
+      "path": "memo._extracted_at",
+      "type": "removed",
+      "old": "2026-03-04T05:28:28.971085+00:00",
+      "new": null
+    },
+    {
+      "path": "memo._onboarding_extracted_at",
+      "type": "added",
+      "old": null,
+      "new": "2026-03-04T05:28:28.971216+00:00"
+    },
+    {
+      "path": "memo._pipeline",
+      "type": "modified",
+      "old": "A",
+      "new": "B"
+    },
+    {
+      "path": "memo._previous_version",
+      "type": "added",
+      "old": null,
+      "new": "v1"
+    },
+    {
+      "path": "memo._source_file",
+      "type": "modified",
+      "old": "ACC-005_demo.txt",
+      "new": "ACC-005_onboarding.txt"
+    },
+    {
+      "path": "memo._version",
+      "type": "modified",
+      "old": "v1",
+      "new": "v2"
+    },
+    {
+      "path": "memo.after_hours_flow_summary",
+      "type": "modified",
+      "old": "Greet, determine if active emergency, collect name/number/address, transfer to on-call, fallback if fail.",
+      "new": "Greet, ask purpose, determine emergency (5 triggers), collect name/number/address (partial address accepted), transfer to on-call 773-555-0388 then owner 773-555-0194 (30s each), if fail give 15-min contact assurance with water shutoff guidance if applicable. Inspection calls = non-emergency path only."
+    },
+    {
+      "path": "memo.call_transfer_rules.max_attempts",
+      "type": "modified",
+      "old": null,
+      "new": 2
+    },
+    {
+      "path": "memo.call_transfer_rules.timeout_seconds",
+      "type": "modified",
+      "old": null,
+      "new": 30
+    },
+    {
+      "path": "memo.call_transfer_rules.transfer_fail_message",
+      "type": "modified",
+      "old": "I was unable to reach our team. A technician will call you back within fifteen minutes.",
+      "new": "I was unable to reach our team directly. Please remain calm. A technician will call you back within fifteen minutes. In the meantime, if water is actively flowing, locate and shut off the main water supply if it is safe to do so."
+    },
+    {
+      "path": "memo.emergency_definition",
+      "type": "modified",
+      "old": [
+        "active water discharge (head activated)",
+        "dry pipe system trip",
+        "backflow preventer failure with contamination risk"
+      ],
+      "new": [
+        "active water discharge (sprinkler head activated)",
+        "dry pipe system trip",
+        "backflow preventer failure with contamination risk",
+        "fire suppression system activation in commercial kitchen",
+        "cracked or burst main riser"
+      ]
+    },
+    {
+      "path": "memo.emergency_routing_rules",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "on-call technician (shared phone)",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "on-call technician (shared rotation phone)",
+          "phone": "773-555-0388",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 2,
+          "contact": "owner",
+          "phone": "773-555-0194",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "memo.integration_constraints",
+      "type": "modified",
+      "old": [
+        "never create sprinkler jobs in ServiceTrade",
+        "do not create any job automatically without human review"
+      ],
+      "new": [
+        "never create sprinkler jobs in ServiceTrade – this includes all sprinkler and fire suppression job types",
+        "inspection scheduling requests may be logged as leads only – not created as jobs",
+        "never discuss ServiceTrade job status – redirect to business hours",
+        "inspection calls after hours are non-emergency – collect info and follow up next business day only"
+      ]
+    },
+    {
+      "path": "memo.non_emergency_routing_rules.collect_fields",
+      "type": "modified",
+      "old": [
+        "name",
+        "phone",
+        "description"
+      ],
+      "new": [
+        "name",
+        "phone",
+        "property_address",
+        "description"
+      ]
+    },
+    {
+      "path": "memo.notes",
+      "type": "modified",
+      "old": "Demo call. Client emphatic about not creating ServiceTrade jobs automatically.",
+      "new": "Emphatic constraint: no ServiceTrade job creation ever. Partial address ok for emergencies. Inspections = non-emergency after hours."
+    },
+    {
+      "path": "memo.office_address",
+      "type": "modified",
+      "old": null,
+      "new": "3741 North Kimball Avenue, Chicago, Illinois 60618"
+    },
+    {
+      "path": "memo.office_hours_flow_summary",
+      "type": "modified",
+      "old": "Greet, understand purpose, collect info, route or take message.",
+      "new": "Greet, collect purpose, collect info, route or take message. Do not create ServiceTrade jobs."
+    },
+    {
+      "path": "memo.questions_or_unknowns",
+      "type": "modified",
+      "old": [
+        "What is the on-call phone number?",
+        "What is the office address?",
+        "What is the exact transfer timeout?"
+      ],
+      "new": []
+    }
+  ],
+  "spec_changes": [
+    {
+      "path": "spec.call_transfer_protocol.max_attempts",
+      "type": "modified",
+      "old": null,
+      "new": 2
+    },
+    {
+      "path": "spec.call_transfer_protocol.routing_order",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "on-call technician (shared phone)",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "on-call technician (shared rotation phone)",
+          "phone": "773-555-0388",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 2,
+          "contact": "owner",
+          "phone": "773-555-0194",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "spec.call_transfer_protocol.timeout_seconds",
+      "type": "modified",
+      "old": null,
+      "new": 30
+    },
+    {
+      "path": "spec.fallback_protocol.message",
+      "type": "modified",
+      "old": "I was unable to reach our team. A technician will call you back within fifteen minutes.",
+      "new": "I was unable to reach our team directly. Please remain calm. A technician will call you back within fifteen minutes. In the meantime, if water is actively flowing, locate and shut off the main water supply if it is safe to do so."
+    },
+    {
+      "path": "spec.integration_constraints",
+      "type": "modified",
+      "old": [
+        "never create sprinkler jobs in ServiceTrade",
+        "do not create any job automatically without human review"
+      ],
+      "new": [
+        "never create sprinkler jobs in ServiceTrade – this includes all sprinkler and fire suppression job types",
+        "inspection scheduling requests may be logged as leads only – not created as jobs",
+        "never discuss ServiceTrade job status – redirect to business hours",
+        "inspection calls after hours are non-emergency – collect info and follow up next business day only"
+      ]
+    },
+    {
+      "path": "spec.key_variables.emergency_routing",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "on-call technician (shared phone)",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "on-call technician (shared rotation phone)",
+          "phone": "773-555-0388",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 2,
+          "contact": "owner",
+          "phone": "773-555-0194",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "spec.key_variables.office_address",
+      "type": "modified",
+      "old": null,
+      "new": "3741 North Kimball Avenue, Chicago, Illinois 60618"
+    },
+    {
+      "path": "spec.questions_or_unknowns",
+      "type": "modified",
+      "old": [
+        "What is the on-call phone number?",
+        "What is the office address?",
+        "What is the exact transfer timeout?"
+      ],
+      "new": []
+    },
+    {
+      "path": "spec.version",
+      "type": "modified",
+      "old": "v1",
+      "new": "v2"
+    }
+  ],
+  "system_prompt_changed": true
+}

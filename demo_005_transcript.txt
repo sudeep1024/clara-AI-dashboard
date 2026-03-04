@@ -1,0 +1,59 @@
+DEMO CALL TRANSCRIPT — SafetyFirst Fire & Safety
+Date: 2024-11-20  |  Duration: 24 min  |  Participants: Marcus Webb (Clara Sales), Raymond Torres (SafetyFirst General Manager)
+
+---
+
+MARCUS: Raymond, appreciate the time. What does SafetyFirst do?
+
+RAYMOND: We do fire extinguisher sales, service, and certification. Also exit and emergency lighting inspection. Mostly small commercial customers — restaurants, retail, small office buildings. We're in Houston, Texas.
+
+MARCUS: Got it. What's the current problem you're trying to solve?
+
+RAYMOND: Missed calls. Our receptionist works 8 to 5 and we're not staffed outside that. Customers call to schedule service or ask about their annual inspection and we miss them. Then they find someone else.
+
+MARCUS: Is this mostly a business-hours volume issue, or also after hours?
+
+RAYMOND: Both. We get calls evenings and weekends from customers wanting to schedule their annual inspections. Fire extinguisher certifications have regulatory deadlines — customers get nervous when they're coming due. But honestly, we don't really do emergencies. Our work isn't emergency dispatch.
+
+MARCUS: Can you think of any scenario that would be genuinely urgent for you?
+
+RAYMOND: Honestly? If a customer had a fire and their extinguisher failed to operate. That would be serious and we'd want to respond. And maybe if a restaurant's whole suppression system needed to be condemned after a kitchen fire. Those are rare but real.
+
+MARCUS: So emergencies for you are basically: extinguisher failure during a fire event, or condemned suppression system.
+
+RAYMOND: Right. But honestly our main use case is just call answering and scheduling. We don't want Clara to over-escalate.
+
+MARCUS: Understood. What are your hours?
+
+RAYMOND: Monday through Friday, 8 to 5, Central time. We have a small office in the Heights neighborhood, Houston.
+
+MARCUS: Weekend hours?
+
+RAYMOND: No, we don't work weekends. 
+
+MARCUS: After hours, if someone does call with something urgent, what should happen?
+
+RAYMOND: Collect their information and tell them we'll call back next business day. That's it. We don't have on-call staff.
+
+MARCUS: What about a genuine emergency — extinguisher failure during a fire?
+
+RAYMOND: In that case, tell them to call 911 first. Then take their details. We'd follow up.
+
+MARCUS: Good safety guidance. Do you use any field software?
+
+RAYMOND: We use Wintac. But again, Clara shouldn't create anything in Wintac — our office staff does that.
+
+MARCUS: Noted. Any other constraints?
+
+RAYMOND: We work a lot with restaurants and the Health Department inspects them. Customers sometimes call panicking about an upcoming inspection. Clara should be able to calm them down and take a message, not promise anything.
+
+[Demo interaction — 8 minutes]
+
+RAYMOND: That was good. Professional tone. My main question is — can it handle a caller who's listing 20 items they need serviced? Or do we just take the name and number?
+
+MARCUS: Clara collects name, number, and a brief description. We never try to collect a full service list on the call — that's what the follow-up call is for.
+
+RAYMOND: Perfect. That's exactly right. Let's move forward.
+
+---
+END OF TRANSCRIPT

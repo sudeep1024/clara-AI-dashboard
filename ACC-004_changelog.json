@@ -1,0 +1,276 @@
+{
+  "account_id": "ACC-004",
+  "generated_at": "2026-03-04T05:28:29.034278+00:00",
+  "summary": {
+    "memo_fields_changed": 18,
+    "spec_fields_changed": 10,
+    "system_prompt_changed": true,
+    "total_changes": 29
+  },
+  "memo_changes": [
+    {
+      "path": "memo._extracted_at",
+      "type": "removed",
+      "old": "2026-03-04T05:28:28.971081+00:00",
+      "new": null
+    },
+    {
+      "path": "memo._onboarding_extracted_at",
+      "type": "added",
+      "old": null,
+      "new": "2026-03-04T05:28:28.971206+00:00"
+    },
+    {
+      "path": "memo._pipeline",
+      "type": "modified",
+      "old": "A",
+      "new": "B"
+    },
+    {
+      "path": "memo._previous_version",
+      "type": "added",
+      "old": null,
+      "new": "v1"
+    },
+    {
+      "path": "memo._source_file",
+      "type": "modified",
+      "old": "ACC-004_demo.txt",
+      "new": "ACC-004_onboarding.txt"
+    },
+    {
+      "path": "memo._version",
+      "type": "modified",
+      "old": "v1",
+      "new": "v2"
+    },
+    {
+      "path": "memo.after_hours_flow_summary",
+      "type": "modified",
+      "old": "Greet, confirm emergency, transfer to on-call electrician, fallback if transfer fails.",
+      "new": "Greet, confirm emergency (5 triggers), collect name/number, transfer to on-call 512-555-0183 then 512-555-0247 (30s each), if fail direct to 911 for life-safety risk or give 15-min callback. Spanish language callers supported."
+    },
+    {
+      "path": "memo.call_transfer_rules.max_attempts",
+      "type": "modified",
+      "old": null,
+      "new": 2
+    },
+    {
+      "path": "memo.call_transfer_rules.pre_transfer_message",
+      "type": "modified",
+      "old": "I'm connecting you with our on-call electrician now.",
+      "new": "I'm connecting you with our on-call electrician now. Please hold."
+    },
+    {
+      "path": "memo.call_transfer_rules.timeout_seconds",
+      "type": "modified",
+      "old": null,
+      "new": 30
+    },
+    {
+      "path": "memo.call_transfer_rules.transfer_fail_message",
+      "type": "modified",
+      "old": "I was unable to reach our on-call team. A technician will call you back.",
+      "new": "I was unable to reach our on-call team. If this is a life-safety emergency, please call 911 immediately. Otherwise, a technician will call you back within fifteen minutes."
+    },
+    {
+      "path": "memo.emergency_definition",
+      "type": "modified",
+      "old": [
+        "total power outage at commercial property",
+        "exposed or sparking wiring",
+        "hot or noisy electrical panel",
+        "immediate electrical safety risk"
+      ],
+      "new": [
+        "total power outage at commercial property",
+        "exposed or sparking wiring",
+        "hot or noisy electrical panel",
+        "immediate electrical safety risk",
+        "electrical fire smell or visible smoke near electrical equipment"
+      ]
+    },
+    {
+      "path": "memo.emergency_routing_rules",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "on-call lead electrician (rotating)",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "on-call electrician",
+          "phone": "512-555-0183",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 2,
+          "contact": "backup on-call electrician",
+          "phone": "512-555-0247",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "memo.integration_constraints",
+      "type": "modified",
+      "old": [
+        "do not create Jobber jobs automatically without human review"
+      ],
+      "new": [
+        "do not create Jobber jobs automatically – human review required",
+        "never reveal on-call technician names to callers – say 'our on-call technician'",
+        "never provide price estimates or quotes on calls – redirect to business hours"
+      ]
+    },
+    {
+      "path": "memo.notes",
+      "type": "modified",
+      "old": "Demo call. On-call rotation numbers not yet provided. Spanish language mentioned as possible need.",
+      "new": "Spanish language support confirmed. On-call names never disclosed to callers."
+    },
+    {
+      "path": "memo.office_address",
+      "type": "modified",
+      "old": null,
+      "new": "512 West Riverside Drive, Austin, Texas 78704"
+    },
+    {
+      "path": "memo.office_hours_flow_summary",
+      "type": "modified",
+      "old": "Greet, collect purpose, route appropriately, take message for non-urgent.",
+      "new": "Greet, collect purpose, collect name and number, route or message. No quotes. No on-call names disclosed."
+    },
+    {
+      "path": "memo.questions_or_unknowns",
+      "type": "modified",
+      "old": [
+        "What are the on-call electrician phone numbers?",
+        "What is the office address?",
+        "Is Spanish language support required?",
+        "How many transfer attempts?"
+      ],
+      "new": []
+    }
+  ],
+  "spec_changes": [
+    {
+      "path": "spec.call_transfer_protocol.max_attempts",
+      "type": "modified",
+      "old": null,
+      "new": 2
+    },
+    {
+      "path": "spec.call_transfer_protocol.pre_transfer_message",
+      "type": "modified",
+      "old": "I'm connecting you with our on-call electrician now.",
+      "new": "I'm connecting you with our on-call electrician now. Please hold."
+    },
+    {
+      "path": "spec.call_transfer_protocol.routing_order",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "on-call lead electrician (rotating)",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "on-call electrician",
+          "phone": "512-555-0183",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 2,
+          "contact": "backup on-call electrician",
+          "phone": "512-555-0247",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "spec.call_transfer_protocol.timeout_seconds",
+      "type": "modified",
+      "old": null,
+      "new": 30
+    },
+    {
+      "path": "spec.fallback_protocol.message",
+      "type": "modified",
+      "old": "I was unable to reach our on-call team. A technician will call you back.",
+      "new": "I was unable to reach our on-call team. If this is a life-safety emergency, please call 911 immediately. Otherwise, a technician will call you back within fifteen minutes."
+    },
+    {
+      "path": "spec.integration_constraints",
+      "type": "modified",
+      "old": [
+        "do not create Jobber jobs automatically without human review"
+      ],
+      "new": [
+        "do not create Jobber jobs automatically – human review required",
+        "never reveal on-call technician names to callers – say 'our on-call technician'",
+        "never provide price estimates or quotes on calls – redirect to business hours"
+      ]
+    },
+    {
+      "path": "spec.key_variables.emergency_routing",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "on-call lead electrician (rotating)",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "on-call electrician",
+          "phone": "512-555-0183",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 2,
+          "contact": "backup on-call electrician",
+          "phone": "512-555-0247",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "spec.key_variables.office_address",
+      "type": "modified",
+      "old": null,
+      "new": "512 West Riverside Drive, Austin, Texas 78704"
+    },
+    {
+      "path": "spec.questions_or_unknowns",
+      "type": "modified",
+      "old": [
+        "What are the on-call electrician phone numbers?",
+        "What is the office address?",
+        "Is Spanish language support required?",
+        "How many transfer attempts?"
+      ],
+      "new": []
+    },
+    {
+      "path": "spec.version",
+      "type": "modified",
+      "old": "v1",
+      "new": "v2"
+    }
+  ],
+  "system_prompt_changed": true
+}

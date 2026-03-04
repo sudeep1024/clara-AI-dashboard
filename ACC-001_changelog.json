@@ -1,0 +1,363 @@
+{
+  "account_id": "ACC-001",
+  "generated_at": "2026-03-04T05:28:28.974808+00:00",
+  "summary": {
+    "memo_fields_changed": 25,
+    "spec_fields_changed": 13,
+    "system_prompt_changed": true,
+    "total_changes": 39
+  },
+  "memo_changes": [
+    {
+      "path": "memo._extracted_at",
+      "type": "removed",
+      "old": "2026-03-04T05:28:28.971046+00:00",
+      "new": null
+    },
+    {
+      "path": "memo._onboarding_extracted_at",
+      "type": "added",
+      "old": null,
+      "new": "2026-03-04T05:28:28.971091+00:00"
+    },
+    {
+      "path": "memo._pipeline",
+      "type": "modified",
+      "old": "A",
+      "new": "B"
+    },
+    {
+      "path": "memo._previous_version",
+      "type": "added",
+      "old": null,
+      "new": "v1"
+    },
+    {
+      "path": "memo._source_file",
+      "type": "modified",
+      "old": "ACC-001_demo.txt",
+      "new": "ACC-001_onboarding.txt"
+    },
+    {
+      "path": "memo._version",
+      "type": "modified",
+      "old": "v1",
+      "new": "v2"
+    },
+    {
+      "path": "memo.after_hours_flow_summary",
+      "type": "modified",
+      "old": "Greet caller, determine if emergency (sprinkler/suppression/alarm), attempt transfer to on-call tech, if fail assure callback.",
+      "new": "Greet, state office closed and provide hours, ask purpose, confirm if emergency (5 defined triggers), collect name/number/address, attempt transfer (Sandra 303-555-0187 then Marcus 303-555-0294, 30s each), if fail assure 15-minute callback and confirm callback number."
+    },
+    {
+      "path": "memo.business_hours.days",
+      "type": "modified",
+      "old": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "new": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ]
+    },
+    {
+      "path": "memo.business_hours.end",
+      "type": "modified",
+      "old": "17:00",
+      "new": "17:30"
+    },
+    {
+      "path": "memo.business_hours.notes",
+      "type": "modified",
+      "old": "Approximate from demo",
+      "new": "Saturday 08:00–12:00 only"
+    },
+    {
+      "path": "memo.business_hours.start",
+      "type": "modified",
+      "old": "08:00",
+      "new": "07:30"
+    },
+    {
+      "path": "memo.call_transfer_rules.max_attempts",
+      "type": "modified",
+      "old": null,
+      "new": 2
+    },
+    {
+      "path": "memo.call_transfer_rules.pre_transfer_message",
+      "type": "modified",
+      "old": "Please hold while I connect you with our team.",
+      "new": "I'm going to connect you with our emergency dispatch now. Please stay on the line."
+    },
+    {
+      "path": "memo.call_transfer_rules.timeout_seconds",
+      "type": "modified",
+      "old": null,
+      "new": 30
+    },
+    {
+      "path": "memo.call_transfer_rules.transfer_fail_message",
+      "type": "modified",
+      "old": "I was unable to reach our team. Someone will call you back.",
+      "new": "I wasn't able to reach our team right now. A technician will call you back within fifteen minutes. Please stay somewhere safe and do not attempt to fix the issue yourself."
+    },
+    {
+      "path": "memo.emergency_definition",
+      "type": "modified",
+      "old": [
+        "sprinkler head discharging",
+        "fire suppression system activation",
+        "active fire alarm triggering the system"
+      ],
+      "new": [
+        "sprinkler head discharging",
+        "fire suppression system activation",
+        "active fire alarm triggering the system",
+        "dry pipe system trip",
+        "flooded pipe section"
+      ]
+    },
+    {
+      "path": "memo.emergency_routing_rules",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "dispatch coordinator",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "dispatch coordinator",
+          "phone": "303-555-0187",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 2,
+          "contact": "operations manager",
+          "phone": "303-555-0294",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "memo.integration_constraints",
+      "type": "modified",
+      "old": [
+        "do not create jobs in ServiceTrade automatically"
+      ],
+      "new": [
+        "never create jobs in ServiceTrade – human review required for all new jobs",
+        "do not engage with ServiceTrade job status inquiries – redirect to business hours"
+      ]
+    },
+    {
+      "path": "memo.non_emergency_routing_rules.message_to_caller",
+      "type": "modified",
+      "old": "We will follow up during business hours.",
+      "new": "We will follow up next business day."
+    },
+    {
+      "path": "memo.non_emergency_routing_rules.notify_method",
+      "type": "modified",
+      "old": "none",
+      "new": "email"
+    },
+    {
+      "path": "memo.non_emergency_routing_rules.notify_target",
+      "type": "modified",
+      "old": null,
+      "new": "dispatch@blueskyfireprotection.com"
+    },
+    {
+      "path": "memo.notes",
+      "type": "modified",
+      "old": "Demo call - directional info only. Routing numbers not yet provided.",
+      "new": "Onboarding confirmed. No agent names mentioned to callers. Saturday hours confirmed."
+    },
+    {
+      "path": "memo.office_address",
+      "type": "modified",
+      "old": null,
+      "new": "4820 Havana Street, Denver, Colorado 80239"
+    },
+    {
+      "path": "memo.office_hours_flow_summary",
+      "type": "modified",
+      "old": "Greet caller, collect name and number, route to appropriate team or take message.",
+      "new": "Greet, ask purpose, collect name and number, route to appropriate team. For emergencies during hours, proceed with emergency transfer protocol."
+    },
+    {
+      "path": "memo.questions_or_unknowns",
+      "type": "modified",
+      "old": [
+        "What is the exact on-call dispatch phone number?",
+        "What is the office address?",
+        "What are the exact business hours?",
+        "Is Spanish language support needed?"
+      ],
+      "new": [
+        "Spanish language support – flagged for future enhancement"
+      ]
+    }
+  ],
+  "spec_changes": [
+    {
+      "path": "spec.call_transfer_protocol.max_attempts",
+      "type": "modified",
+      "old": null,
+      "new": 2
+    },
+    {
+      "path": "spec.call_transfer_protocol.pre_transfer_message",
+      "type": "modified",
+      "old": "Please hold while I connect you with our team.",
+      "new": "I'm going to connect you with our emergency dispatch now. Please stay on the line."
+    },
+    {
+      "path": "spec.call_transfer_protocol.routing_order",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "dispatch coordinator",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "dispatch coordinator",
+          "phone": "303-555-0187",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 2,
+          "contact": "operations manager",
+          "phone": "303-555-0294",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "spec.call_transfer_protocol.timeout_seconds",
+      "type": "modified",
+      "old": null,
+      "new": 30
+    },
+    {
+      "path": "spec.fallback_protocol.message",
+      "type": "modified",
+      "old": "I was unable to reach our team. Someone will call you back.",
+      "new": "I wasn't able to reach our team right now. A technician will call you back within fifteen minutes. Please stay somewhere safe and do not attempt to fix the issue yourself."
+    },
+    {
+      "path": "spec.integration_constraints",
+      "type": "modified",
+      "old": [
+        "do not create jobs in ServiceTrade automatically"
+      ],
+      "new": [
+        "never create jobs in ServiceTrade – human review required for all new jobs",
+        "do not engage with ServiceTrade job status inquiries – redirect to business hours"
+      ]
+    },
+    {
+      "path": "spec.key_variables.business_hours_days",
+      "type": "modified",
+      "old": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "new": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ]
+    },
+    {
+      "path": "spec.key_variables.business_hours_end",
+      "type": "modified",
+      "old": "17:00",
+      "new": "17:30"
+    },
+    {
+      "path": "spec.key_variables.business_hours_start",
+      "type": "modified",
+      "old": "08:00",
+      "new": "07:30"
+    },
+    {
+      "path": "spec.key_variables.emergency_routing",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "dispatch coordinator",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "dispatch coordinator",
+          "phone": "303-555-0187",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 2,
+          "contact": "operations manager",
+          "phone": "303-555-0294",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "spec.key_variables.office_address",
+      "type": "modified",
+      "old": null,
+      "new": "4820 Havana Street, Denver, Colorado 80239"
+    },
+    {
+      "path": "spec.questions_or_unknowns",
+      "type": "modified",
+      "old": [
+        "What is the exact on-call dispatch phone number?",
+        "What is the office address?",
+        "What are the exact business hours?",
+        "Is Spanish language support needed?"
+      ],
+      "new": [
+        "Spanish language support – flagged for future enhancement"
+      ]
+    },
+    {
+      "path": "spec.version",
+      "type": "modified",
+      "old": "v1",
+      "new": "v2"
+    }
+  ],
+  "system_prompt_changed": true
+}

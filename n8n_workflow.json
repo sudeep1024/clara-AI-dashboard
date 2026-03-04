@@ -1,0 +1,154 @@
+{
+  "name": "Clara AI Pipeline",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "start-node",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [80, 300]
+    },
+    {
+      "parameters": {
+        "path": "trigger-pipeline-a",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-pipeline-a",
+      "name": "Webhook: Pipeline A",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [280, 200],
+      "notes": "POST /trigger-pipeline-a\nBody: { account_id, transcript_text | transcript_path }"
+    },
+    {
+      "parameters": {
+        "path": "trigger-pipeline-b",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-pipeline-b",
+      "name": "Webhook: Pipeline B",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [280, 400],
+      "notes": "POST /trigger-pipeline-b\nBody: { account_id, transcript_text | transcript_path }"
+    },
+    {
+      "parameters": {
+        "command": "cd /app && python scripts/pipeline_a.py --account-id={{ $json.account_id }} --transcript={{ $json.transcript_path }}"
+      },
+      "id": "exec-pipeline-a",
+      "name": "Execute: Pipeline A",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [500, 200]
+    },
+    {
+      "parameters": {
+        "command": "cd /app && python scripts/pipeline_b.py --account-id={{ $json.account_id }} --transcript={{ $json.transcript_path }}"
+      },
+      "id": "exec-pipeline-b",
+      "name": "Execute: Pipeline B",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [500, 400]
+    },
+    {
+      "parameters": {
+        "jsCode": "const stdout = $input.first().json.stdout || '{}';\nlet result;\ntry { result = JSON.parse(stdout); } catch(e) { result = { raw: stdout }; }\nreturn [{ json: result }];"
+      },
+      "id": "parse-output-a",
+      "name": "Parse Output A",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [700, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "const stdout = $input.first().json.stdout || '{}';\nlet result;\ntry { result = JSON.parse(stdout); } catch(e) { result = { raw: stdout }; }\nreturn [{ json: result }];"
+      },
+      "id": "parse-output-b",
+      "name": "Parse Output B",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [700, 400]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}"
+      },
+      "id": "respond-a",
+      "name": "Respond A",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}"
+      },
+      "id": "respond-b",
+      "name": "Respond B",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [900, 400]
+    },
+    {
+      "parameters": {
+        "path": "batch-run",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "webhook-batch",
+      "name": "Webhook: Batch Run",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [280, 600],
+      "notes": "POST /batch-run — runs all 10 transcripts"
+    },
+    {
+      "parameters": {
+        "command": "cd /app && python scripts/local_runner.py"
+      },
+      "id": "exec-batch",
+      "name": "Execute: Batch",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [500, 600]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"status\": \"batch_complete\", \"output\": $json.stdout }"
+      },
+      "id": "respond-batch",
+      "name": "Respond Batch",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [700, 600]
+    }
+  ],
+  "connections": {
+    "Webhook: Pipeline A":  { "main": [[{ "node": "Execute: Pipeline A", "type": "main", "index": 0 }]] },
+    "Webhook: Pipeline B":  { "main": [[{ "node": "Execute: Pipeline B", "type": "main", "index": 0 }]] },
+    "Webhook: Batch Run":   { "main": [[{ "node": "Execute: Batch",      "type": "main", "index": 0 }]] },
+    "Execute: Pipeline A":  { "main": [[{ "node": "Parse Output A",      "type": "main", "index": 0 }]] },
+    "Execute: Pipeline B":  { "main": [[{ "node": "Parse Output B",      "type": "main", "index": 0 }]] },
+    "Execute: Batch":       { "main": [[{ "node": "Respond Batch",       "type": "main", "index": 0 }]] },
+    "Parse Output A":       { "main": [[{ "node": "Respond A",           "type": "main", "index": 0 }]] },
+    "Parse Output B":       { "main": [[{ "node": "Respond B",           "type": "main", "index": 0 }]] }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "meta": {
+    "description": "Clara AI: Demo Call → v1 Agent → Onboarding → v2 Agent",
+    "tags": ["clara", "retell", "automation", "fire-safety"]
+  }
+}

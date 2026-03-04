@@ -1,0 +1,55 @@
+ONBOARDING CALL TRANSCRIPT — ProSprinkler Solutions
+Date: 2024-12-05  |  Duration: 38 min  |  Participants: Lisa Cheng (Clara Onboarding), Kevin Okafor (Owner)
+
+---
+
+LISA: Kevin, let's lock everything down today. Business hours?
+
+KEVIN: Monday through Friday, 7am to 6pm Central. I'm flexible but those are the "official" hours.
+
+LISA: Office address?
+
+KEVIN: No physical office. My mailing address is 412 Ogden Avenue, Naperville, Illinois 60563. I work from my truck.
+
+LISA: Services you support?
+
+KEVIN: Sprinkler installation, repair, and service. Backflow preventer testing. Annual inspections. That's it.
+
+LISA: Emergency triggers?
+
+KEVIN: Active water discharge from a sprinkler head. Accidental head activation. Flooding inside a building from a pipe failure. Those are same-day, any hour.
+
+LISA: And the routing?
+
+KEVIN: Try my cell first — 312-555-0182. If I don't answer in 30 seconds, try Dave at 312-555-0349. If Dave doesn't answer in 30 seconds, leave a voicemail on my cell and tell the caller I'll call back within 30 minutes.
+
+LISA: What should Clara say if both fail?
+
+KEVIN: "I was unable to reach a technician directly. I've left an urgent message and Kevin will call you back within 30 minutes. Please stay available."
+
+LISA: Transfer timeout?
+
+KEVIN: 30 seconds. Don't wait longer — customers hang up.
+
+LISA: Non-emergency after hours?
+
+KEVIN: Collect name, callback number, and one sentence about the issue. Tell them I'll call back next business day.
+
+LISA: Any software constraints?
+
+KEVIN: No field software, just Google Sheets. Nothing automated.
+
+LISA: Integration constraints from your side?
+
+KEVIN: Don't promise arrival times. I can't commit to specific windows on the call. Clara should say "we'll have someone contact you shortly" not "a tech will be there in an hour."
+
+LISA: Noted. Any special accounts?
+
+KEVIN: One big one — Naperville School District. If they call for an emergency, I want to know immediately regardless of time. Same routing but flag them.
+
+LISA: Got it. Anything else?
+
+KEVIN: That's it. Keep it simple.
+
+---
+END OF TRANSCRIPT

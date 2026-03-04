@@ -1,0 +1,53 @@
+DEMO CALL TRANSCRIPT — AlarmTech Security Systems
+Date: 2024-11-15  |  Duration: 31 min  |  Participants: Marcus Webb (Clara Sales), Sandra Reeves (AlarmTech Director of Operations)
+
+---
+
+MARCUS: Sandra, let's get started. What's the pain you're trying to solve?
+
+SANDRA: We're a commercial alarm company based in Atlanta. We install and monitor fire and burglar alarms for warehouses, retail, office buildings. We have about 400 monitored accounts. Our call volume is high — 60 to 80 calls a day. A lot of those are just customers asking basic questions or wanting to test their systems. We need help triaging.
+
+MARCUS: So it's less about after-hours emergencies and more about volume management?
+
+SANDRA: Both, honestly. During business hours, our front desk is overwhelmed. After hours, we have a monitoring center that handles alarms, but customers call our main line wanting to speak to someone. We need Clara to handle that first contact.
+
+MARCUS: Let's talk about business hours first. What are they?
+
+SANDRA: Monday through Friday, 8am to 5:30pm. Eastern time. We're in Buckhead, Atlanta.
+
+MARCUS: And what do those daytime calls look like?
+
+SANDRA: Customers asking about their invoice, requesting a service call for a faulty sensor, scheduling annual inspections, false alarm calls — someone accidentally set it off and just wants to talk to someone.
+
+MARCUS: And after hours?
+
+SANDRA: Anything that's a live alarm situation — like they're getting calls from their monitoring center and they want to reach a real person. Or a sensor malfunctioned and they need someone tonight. Also break-ins, obviously.
+
+MARCUS: Do you dispatch techs directly or route to a monitoring center?
+
+SANDRA: We have an on-call tech rotation. At night it routes to our monitoring coordinator first, then to the on-call tech. The monitoring center is separate and handles the alarm signals — Clara would only handle calls to our main business line.
+
+MARCUS: Good distinction. What would be a non-emergency in your world?
+
+SANDRA: Low battery warning on a panel, a sensor offline but no alarm triggered, customer wants to add a new zone to their system. Those can wait.
+
+MARCUS: Any field service software?
+
+SANDRA: We use Alarm.com and also have our own CRM, ServiceMax. We'd need Clara to never promise to create tickets directly — our team does that.
+
+MARCUS: Noted. Let me show you the demo.
+
+[Demo interaction — 14 minutes]
+
+SANDRA: I like the tone. Can it handle situations where a customer is upset or panicking?
+
+MARCUS: We design it to be calm and reassuring — if the caller seems distressed, it shortens its prompts and focuses on getting information quickly.
+
+SANDRA: That's important for us. What about if the caller hangs up during transfer?
+
+MARCUS: Clara logs all caller details before initiating transfer, so even if the call drops, your team has everything they need to call back.
+
+SANDRA: Okay. I think we want to move forward.
+
+---
+END OF TRANSCRIPT

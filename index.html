@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clara AI — Pipeline Dashboard</title>
+<style>
+  :root {
+    --bg: #0f1117; --surface: #1a1d27; --border: #2e3147;
+    --text: #e2e8f0; --muted: #7c849e; --accent: #6366f1;
+    --green: #22c55e; --yellow: #f59e0b; --red: #ef4444; --blue: #3b82f6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; font-size: 14px; }
+  header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 16px 32px; display: flex; align-items: center; gap: 12px; }
+  header h1 { font-size: 18px; font-weight: 700; }
+  header span { color: var(--muted); font-size: 13px; }
+  .badge { background: var(--accent); color: white; padding: 2px 8px; border-radius: 9999px; font-size: 11px; font-weight: 600; }
+
+  .main { display: grid; grid-template-columns: 260px 1fr; height: calc(100vh - 57px); }
+
+  /* Sidebar */
+  .sidebar { background: var(--surface); border-right: 1px solid var(--border); overflow-y: auto; padding: 12px 0; }
+  .sidebar-section { padding: 8px 16px; color: var(--muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; margin-top: 8px; }
+  .account-item { padding: 10px 16px; cursor: pointer; border-left: 3px solid transparent; transition: all .15s; }
+  .account-item:hover { background: rgba(99,102,241,.08); }
+  .account-item.active { border-left-color: var(--accent); background: rgba(99,102,241,.12); }
+  .account-name { font-weight: 600; font-size: 13px; }
+  .account-sub { color: var(--muted); font-size: 11px; margin-top: 2px; }
+  .v-badge { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; margin-right: 4px; }
+  .v1 { background: rgba(59,130,246,.2); color: #93c5fd; }
+  .v2 { background: rgba(34,197,94,.2); color: #86efac; }
+
+  /* Content */
+  .content { overflow-y: auto; padding: 24px 32px; }
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+  .tab { padding: 8px 16px; cursor: pointer; border-bottom: 2px solid transparent; color: var(--muted); font-size: 13px; transition: all .15s; }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Cards */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .card h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 10px; }
+  .field-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.04); font-size: 12px; }
+  .field-row:last-child { border-bottom: none; }
+  .field-key { color: var(--muted); }
+  .field-val { color: var(--text); max-width: 60%; text-align: right; word-break: break-word; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .tag { background: rgba(99,102,241,.15); color: #a5b4fc; padding: 2px 7px; border-radius: 4px; font-size: 11px; }
+  .tag.warn { background: rgba(245,158,11,.15); color: #fcd34d; }
+  .tag.danger { background: rgba(239,68,68,.15); color: #fca5a5; }
+  .tag.ok { background: rgba(34,197,94,.15); color: #86efac; }
+
+  /* Diff viewer */
+  .diff-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .diff-table th { background: rgba(255,255,255,.04); padding: 8px 12px; text-align: left; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--border); }
+  .diff-table td { padding: 7px 12px; border-bottom: 1px solid rgba(255,255,255,.03); vertical-align: top; }
+  .diff-table tr:hover td { background: rgba(255,255,255,.02); }
+  .diff-action { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 10px; font-weight: 700; }
+  .action-added    { background: rgba(34,197,94,.15); color: #86efac; }
+  .action-updated  { background: rgba(99,102,241,.15); color: #a5b4fc; }
+  .action-removed  { background: rgba(239,68,68,.15); color: #fca5a5; }
+  .action-cleared  { background: rgba(245,158,11,.15); color: #fcd34d; }
+  .old-val { color: var(--red); text-decoration: line-through; opacity: .7; }
+  .new-val { color: var(--green); }
+  .field-name { font-family: 'Menlo', monospace; color: #a5b4fc; }
+
+  /* System prompt */
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; white-space: pre-wrap; font-size: 12px; line-height: 1.6; color: #cbd5e1; font-family: 'Menlo', monospace; max-height: 600px; overflow-y: auto; }
+
+  /* Summary bar */
+  .summary-bar { display: flex; gap: 16px; margin-bottom: 20px; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 12px 16px; flex: 1; }
+  .stat-num { font-size: 28px; font-weight: 700; }
+  .stat-label { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .stat.green .stat-num { color: var(--green); }
+  .stat.yellow .stat-num { color: var(--yellow); }
+  .stat.blue .stat-num { color: var(--blue); }
+
+  .empty { color: var(--muted); font-style: italic; text-align: center; padding: 40px; }
+  .ver-selector { display: flex; gap: 8px; margin-bottom: 16px; }
+  .ver-btn { padding: 5px 14px; border-radius: 6px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; font-size: 13px; }
+  .ver-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+</style>
+</head>
+<body>
+
+<header>
+  <div style="font-size:20px">🔥</div>
+  <h1>Clara AI Pipeline</h1>
+  <span>Demo → v1 Agent · Onboarding → v2 Agent</span>
+  <div style="margin-left:auto; display:flex; gap:8px; align-items:center;">
+    <span class="badge">5 Accounts</span>
+    <span class="badge" style="background:#22c55e">10/10 ✓</span>
+  </div>
+</header>
+
+<div class="main">
+  <div class="sidebar" id="sidebar"></div>
+  <div class="content" id="content">
+    <div class="empty">← Select an account to view details</div>
+  </div>
+</div>
+
+<script>
+// ── Embedded Data ────────────────────────────────────────────────────────────
+const ACCOUNTS = {
+  account_001: {
+    company: "FireGuard Protection Services",
+    industry: "Fire Suppression",
+    v1: {
+      memo: {"account_id":"account_001","company_name":"FireGuard Protection Services","business_hours":{"days":"Monday through Friday","start":null,"end":null,"timezone":"America/Chicago"},"office_address":null,"services_supported":["Fire Suppression","Annual Certification"],"emergency_definition":["Active sprinkler discharge","Fire alarm activation","Fire panel fault"],"emergency_routing_rules":{"primary_contact":null,"contact_order":[],"fallback":null},"non_emergency_routing_rules":"Collect name, callback number, and brief description. Confirm follow-up next business day.","call_transfer_rules":{"timeout_seconds":null,"retries":1,"message_on_fail":null},"integration_constraints":[],"after_hours_flow_summary":"After hours, Clara identifies whether the call is an emergency...","office_hours_flow_summary":"During business hours (Monday through Friday), Clara greets the caller...","questions_or_unknowns":["Emergency contact phone numbers not provided","Transfer timeout not specified","Office address not mentioned"],"notes":null},
+      spec_version: "v1"
+    },
+    v2: {
+      memo: {"account_id":"account_001","company_name":"FireGuard Protection Services","business_hours":{"days":"Monday through Friday","start":"8AM","end":"5PM","timezone":"America/Chicago"},"office_address":"2847 Rowlett Road, Garland, Texas 75043","services_supported":["Fire Suppression","Annual Inspection","Fire Alarm Installation"],"emergency_definition":["Active sprinkler discharge","Fire alarm signal","Smoke smell","Flooding inside building","Fire panel fault","Carbon monoxide alarm"],"emergency_routing_rules":{"primary_contact":"Dispatch line","contact_order":["972-555-0148","972-555-0291","972-555-0067"],"fallback":"Text all three numbers with caller info; caller told team alerted within 15 min"},"non_emergency_routing_rules":"Collect name, callback number, brief description. Follow up next business day.","call_transfer_rules":{"timeout_seconds":45,"retries":1,"message_on_fail":"I was unable to reach our on-call team directly, but I've sent them your information and they'll call you back within 15 minutes. Please keep your phone nearby."},"integration_constraints":["Never create a sprinkler job order directly from a Clara call","Never quote prices to callers"],"after_hours_flow_summary":"After hours, Clara identifies whether the call is an emergency. For emergencies (sprinkler discharge, fire alarm, smoke, flooding, panel fault, CO alarm), she collects name, number, address, then attempts transfer to dispatch (972-555-0148) → Brett (972-555-0291) → Diana (972-555-0067), 45-second timeout each. If all fail, texts all three and assures 15-minute callback.","office_hours_flow_summary":"During business hours (Monday–Friday, 8AM–5PM CT), Clara greets the caller, asks their reason, collects name and callback number, attempts transfer within 45 seconds. If transfer fails, caller is assured a callback and interaction is logged.","questions_or_unknowns":["VIP account routing numbers (Lone Star Brewery, DFW Airport Cargo, Garland ISD) to be confirmed"],"notes":"Spanish-speaking customers ~10%; bilingual support requested for future."},
+      spec_version: "v2"
+    },
+    changelog: [
+      {field:"business_hours.start",action:"added",old:null,new:"8AM"},
+      {field:"business_hours.end",action:"added",old:null,new:"5PM"},
+      {field:"office_address",action:"added",old:null,new:"2847 Rowlett Road, Garland, Texas 75043"},
+      {field:"call_transfer_rules.timeout_seconds",action:"added",old:null,new:45},
+      {field:"call_transfer_rules.message_on_fail",action:"added",old:null,new:"I was unable to reach our on-call team..."},
+      {field:"emergency_routing_rules.contact_order",action:"updated",old:"[]",new:'["972-555-0148","972-555-0291","972-555-0067"]'},
+      {field:"emergency_definition",action:"updated",old:"3 triggers",new:"6 triggers (added: smoke smell, flooding, CO alarm)"},
+      {field:"integration_constraints",action:"added",old:"[]",new:"Never create sprinkler job; never quote prices"},
+      {field:"questions_or_unknowns",action:"updated",old:"3 unknowns",new:"1 unknown (VIP numbers)"},
+      {field:"office_hours_flow_summary",action:"added",old:null,new:"Fully defined"},
+      {field:"after_hours_flow_summary",action:"added",old:null,new:"Fully defined"},
+    ]
+  },
+  account_002: {
+    company: "ProSprinkler Solutions",
+    industry: "Sprinkler Service",
+    v1: {
+      memo: {"account_id":"account_002","company_name":"ProSprinkler Solutions","business_hours":{"days":"Monday through Friday","start":"7AM","end":"6PM","timezone":"America/Chicago"},"office_address":null,"services_supported":["Sprinkler Installation","Sprinkler Repair","Sprinkler Service","Annual Inspection"],"emergency_definition":["Active sprinkler discharge","Flooding inside building"],"emergency_routing_rules":{"primary_contact":null,"contact_order":[],"fallback":null},"non_emergency_routing_rules":"Collect name, callback number, and brief description. Confirm follow-up next business day.","call_transfer_rules":{"timeout_seconds":null,"retries":1,"message_on_fail":null},"integration_constraints":[],"after_hours_flow_summary":"After hours, Clara identifies whether the call is an emergency...","office_hours_flow_summary":"During business hours (Monday through Friday, 7AM–6PM CT), Clara greets the caller...","questions_or_unknowns":["Emergency contact phone numbers not provided","Transfer timeout not specified","Office address not mentioned"],"notes":null},
+      spec_version: "v1"
+    },
+    v2: {
+      memo: {"account_id":"account_002","company_name":"ProSprinkler Solutions","business_hours":{"days":"Monday through Friday","start":"7AM","end":"6PM","timezone":"America/Chicago"},"office_address":"412 Ogden Avenue, Naperville, Illinois 60563 (mailing only)","services_supported":["Sprinkler Installation","Sprinkler Repair","Sprinkler Service","Backflow Preventer Testing","Annual Inspections"],"emergency_definition":["Active water discharge from sprinkler head","Accidental head activation","Flooding inside building from pipe failure"],"emergency_routing_rules":{"primary_contact":"Kevin (owner)","contact_order":["312-555-0182","312-555-0349"],"fallback":"Voicemail on Kevin's cell; caller told 30-minute callback"},"non_emergency_routing_rules":"Collect name, callback number, brief description. Follow up next business day.","call_transfer_rules":{"timeout_seconds":30,"retries":1,"message_on_fail":"I was unable to reach a technician directly. I've left an urgent message and Kevin will call you back within 30 minutes. Please stay available."},"integration_constraints":["No field software — Google Sheets only","Do not promise arrival time windows; say 'we'll have someone contact you shortly'"],"after_hours_flow_summary":"Emergencies: collect name, number, address → try Kevin (312-555-0182, 30s) → try Dave (312-555-0349, 30s) → if fail, voicemail + assure 30-min callback. Non-emergency: name + number + description, call back next business day.","office_hours_flow_summary":"Monday–Friday 7AM–6PM CT. Greet, ask purpose, collect name + callback number, transfer to Kevin within 30s. If transfer fails, log and assure callback.","questions_or_unknowns":["Weekly tech rotation schedule — Kevin provides updates manually"],"notes":"Owner-operator; no office; Naperville School District is VIP account."},
+      spec_version: "v2"
+    },
+    changelog: [
+      {field:"office_address",action:"added",old:null,new:"412 Ogden Avenue, Naperville, IL"},
+      {field:"call_transfer_rules.timeout_seconds",action:"added",old:null,new:30},
+      {field:"call_transfer_rules.message_on_fail",action:"added",old:null,new:"Kevin will call back within 30 minutes..."},
+      {field:"emergency_routing_rules.contact_order",action:"updated",old:"[]",new:'["312-555-0182","312-555-0349"]'},
+      {field:"emergency_routing_rules.primary_contact",action:"added",old:null,new:"Kevin (owner)"},
+      {field:"integration_constraints",action:"added",old:"[]",new:"No field software; no arrival time promises"},
+      {field:"services_supported",action:"updated",old:"4 services",new:"5 services (added backflow testing)"},
+      {field:"questions_or_unknowns",action:"updated",old:"3 unknowns",new:"1 unknown (rotation schedule)"},
+      {field:"after_hours_flow_summary",action:"added",old:null,new:"Fully defined"},
+    ]
+  },
+  account_003: {
+    company: "AlarmTech Security Systems",
+    industry: "Security & Alarm",
+    v1: {
+      memo: {"account_id":"account_003","company_name":"AlarmTech Security Systems","business_hours":{"days":"Monday through Friday","start":"8AM","end":"5:30PM","timezone":"America/New_York"},"office_address":null,"services_supported":["Fire Alarm Installation","Alarm Monitoring","Annual Inspection","CCTV"],"emergency_definition":["Fire alarm signal","Break-in in progress","Panel is offline"],"emergency_routing_rules":{"primary_contact":null,"contact_order":[],"fallback":null},"non_emergency_routing_rules":"Collect name, callback number, brief description. Next business day follow-up.","call_transfer_rules":{"timeout_seconds":null,"retries":1,"message_on_fail":null},"integration_constraints":[],"after_hours_flow_summary":"After hours, Clara identifies emergency...","office_hours_flow_summary":"During business hours (Mon–Fri 8AM–5:30PM ET), Clara greets the caller...","questions_or_unknowns":["Emergency contact phone numbers not provided","Transfer timeout not specified","Office address not mentioned"],"notes":null},
+      spec_version: "v1"
+    },
+    v2: {
+      memo: {"account_id":"account_003","company_name":"AlarmTech Security Systems","business_hours":{"days":"Monday through Friday","start":"8AM","end":"5:30PM","timezone":"America/New_York"},"office_address":"3100 Piedmont Road NE, Suite 200, Atlanta, GA 30305","services_supported":["Fire Alarm Installation","Burglar Alarm Installation","Alarm Monitoring","Access Control","CCTV","Annual Inspections"],"emergency_definition":["Live alarm signal from monitored account","Confirmed break-in or fire","False alarm causing repeated dispatch","System panel offline — building unprotected"],"emergency_routing_rules":{"primary_contact":"Priya (monitoring coordinator)","contact_order":["404-555-0217","404-555-0382","404-555-0459"],"fallback":"Email alert to ops@alarmtechsystems.com; caller told 20-minute callback"},"non_emergency_routing_rules":"Collect name, number, account number if available, brief description. Next business day.","call_transfer_rules":{"timeout_seconds":40,"retries":1,"message_on_fail":"I was unable to reach our on-call team right now. I have your information and our operations team has been notified. Someone will contact you within 20 minutes."},"integration_constraints":["Never promise to create a ticket in ServiceMax","Never confirm monitoring status over the phone","Never give out technician cell numbers to customers","Do not confirm or deny alarm details to fire department — take their info and say monitoring center will follow up"],"after_hours_flow_summary":"Emergency: collect name, number → transfer to Priya (404-555-0217, 40s) → Mike (404-555-0382, 40s) → James (404-555-0459, 40s) → email alert + 20-min callback assurance. Non-emergency: collect name, number, account number, description; next business day follow-up.","office_hours_flow_summary":"Mon–Fri 8AM–5:30PM ET. Greet, ask purpose, collect name + callback number, transfer within 40s. Also handles alarm test calls (note but don't escalate) and fire department verification calls (take info, refer to monitoring center).","questions_or_unknowns":["Hartsfield Corporate Park VIP caller numbers to be provided","Exact ServiceMax field mapping for do-not-create rule"],"notes":"Atlanta-based. Monitoring center handles alarm signals separately from main line. Hartsfield Corporate Park is priority account — route directly to Mike first."},
+      spec_version: "v2"
+    },
+    changelog: [
+      {field:"office_address",action:"added",old:null,new:"3100 Piedmont Road NE, Suite 200, Atlanta GA"},
+      {field:"call_transfer_rules.timeout_seconds",action:"added",old:null,new:40},
+      {field:"call_transfer_rules.message_on_fail",action:"added",old:null,new:"20-minute callback assurance..."},
+      {field:"emergency_routing_rules.contact_order",action:"updated",old:"[]",new:'["404-555-0217","404-555-0382","404-555-0459"]'},
+      {field:"emergency_routing_rules.primary_contact",action:"added",old:null,new:"Priya (monitoring coordinator)"},
+      {field:"emergency_routing_rules.fallback",action:"added",old:null,new:"Email ops@alarmtechsystems.com"},
+      {field:"integration_constraints",action:"added",old:"[]",new:"4 constraints added"},
+      {field:"services_supported",action:"updated",old:"4 services",new:"6 services"},
+      {field:"emergency_definition",action:"updated",old:"3 triggers",new:"4 triggers"},
+      {field:"questions_or_unknowns",action:"updated",old:"3 unknowns",new:"2 unknowns"},
+      {field:"notes",action:"added",old:null,new:"VIP account, fire dept handling rules"},
+    ]
+  },
+  account_004: {
+    company: "BlueSky HVAC Services",
+    industry: "HVAC",
+    v1: {
+      memo: {"account_id":"account_004","company_name":"BlueSky HVAC Services","business_hours":{"days":"Monday through Friday","start":"7AM","end":"5PM","timezone":"America/Phoenix"},"office_address":null,"services_supported":["HVAC Repair","HVAC Maintenance","Chiller Service","Boiler Service","Rooftop Unit Repair","Preventive Maintenance"],"emergency_definition":["Complete cooling failure","Server room overheating","Walk-in cooler or freezer failure","Boiler failure"],"emergency_routing_rules":{"primary_contact":"Pam (dispatch coordinator)","contact_order":[],"fallback":null},"non_emergency_routing_rules":"Collect name, callback number, brief description. Next business day follow-up.","call_transfer_rules":{"timeout_seconds":30,"retries":1,"message_on_fail":null},"integration_constraints":[],"after_hours_flow_summary":"After hours Clara identifies emergency...","office_hours_flow_summary":"Mon–Fri 7AM–5PM MT. Greet, ask purpose...","questions_or_unknowns":["Emergency contact phone numbers not provided","Office address not mentioned"],"notes":null},
+      spec_version: "v1"
+    },
+    v2: {
+      memo: {"account_id":"account_004","company_name":"BlueSky HVAC Services","business_hours":{"days":"Monday through Friday + Saturday May–Sep","start":"7AM","end":"5PM (Sat: noon)","timezone":"America/Phoenix"},"office_address":"901 S Mill Avenue, Suite 110, Tempe, Arizona 85281","services_supported":["Commercial HVAC Repair","Chiller & Boiler Service","Rooftop Unit Repair","Preventive Maintenance","New Commercial Installs"],"emergency_definition":["Complete cooling failure in occupied building","Server room overheating","Walk-in cooler or freezer failure (food service)","Boiler failure in occupied building","Gas smell near HVAC (direct to 911 + utility FIRST, then route to tech)"],"emergency_routing_rules":{"primary_contact":"Pam (dispatch coordinator)","contact_order":["480-555-0193","480-555-0276"],"fallback":"Text Pam + email pam@blueskyaz.com; caller told 20-minute callback"},"non_emergency_routing_rules":"Collect name, company name, callback number, brief description. Next business day (or same-day Saturday during summer hours).","call_transfer_rules":{"timeout_seconds":30,"retries":1,"message_on_fail":"I was unable to reach our on-call team directly. I've sent them your information and someone will call you within 20 minutes. Please stay near your phone."},"integration_constraints":["Do not create work orders in ServiceTitan — Pam handles all dispatch","Do not promise arrival windows — say 'we'll have someone contact you shortly'","Do not quote part costs — post-diagnosis quotes only","Pinnacle Hotels (6 properties) — route directly to Thomas (480-555-0041) first","For large install/replacement inquiries — collect name and number only, flag for sales team"],"after_hours_flow_summary":"Emergency: gas smell → 911 first + utility, then route. Other emergencies: collect name, number → Pam (480-555-0193, 30s) → Carlos (480-555-0276, 30s) → text+email Pam + 20-min callback. Non-emergency: name, company, number, description; next business day.","office_hours_flow_summary":"Mon–Fri 7AM–5PM MT (May–Sep also Sat 8AM–noon). Greet, ask purpose, collect name + company + callback number, transfer to Pam within 30s. Large jobs flagged to sales.","questions_or_unknowns":["Weekly on-call tech rotation — Pam emails updated number each Monday","Pinnacle Hotels property phone numbers (6 sites) — Pam to provide list"],"notes":"Seasonal Saturday hours May–Sep. Pinnacle Hotels is VIP — direct to Thomas. Gas smell = safety protocol."},
+      spec_version: "v2"
+    },
+    changelog: [
+      {field:"office_address",action:"added",old:null,new:"901 S Mill Avenue, Tempe AZ"},
+      {field:"call_transfer_rules.message_on_fail",action:"added",old:null,new:"20-minute callback..."},
+      {field:"emergency_routing_rules.contact_order",action:"updated",old:"[]",new:'["480-555-0193","480-555-0276"]'},
+      {field:"emergency_definition",action:"updated",old:"4 triggers",new:"5 triggers (added gas smell + 911 protocol)"},
+      {field:"integration_constraints",action:"added",old:"[]",new:"5 constraints (ServiceTitan, pricing, Pinnacle, sales)"},
+      {field:"business_hours.days",action:"updated",old:"Mon–Fri",new:"Mon–Fri + Sat May–Sep"},
+      {field:"questions_or_unknowns",action:"updated",old:"2 unknowns",new:"2 unknowns (rotation + Pinnacle numbers)"},
+    ]
+  },
+  account_005: {
+    company: "SafetyFirst Fire & Safety",
+    industry: "Fire Extinguisher & Safety",
+    v1: {
+      memo: {"account_id":"account_005","company_name":"SafetyFirst Fire & Safety","business_hours":{"days":"Monday through Friday","start":"8AM","end":"5PM","timezone":"America/Chicago"},"office_address":null,"services_supported":["Fire Extinguisher Sales","Fire Extinguisher Service","Annual Certification","Emergency Lighting Inspection","Exit Sign Inspection"],"emergency_definition":["Extinguisher failure during fire event","Kitchen suppression post-discharge inspection"],"emergency_routing_rules":{"primary_contact":null,"contact_order":[],"fallback":null},"non_emergency_routing_rules":"Collect name, callback number, brief description. Next business day follow-up.","call_transfer_rules":{"timeout_seconds":null,"retries":1,"message_on_fail":null},"integration_constraints":[],"after_hours_flow_summary":"After hours, Clara identifies emergency...","office_hours_flow_summary":"Mon–Fri 8AM–5PM CT. Clara greets caller...","questions_or_unknowns":["Emergency contact phone numbers not provided","Transfer timeout not specified","Office address not mentioned"],"notes":null},
+      spec_version: "v1"
+    },
+    v2: {
+      memo: {"account_id":"account_005","company_name":"SafetyFirst Fire & Safety","business_hours":{"days":"Monday through Friday","start":"8AM","end":"5PM","timezone":"America/Chicago"},"office_address":"1402 Heights Boulevard, Houston, Texas 77008","services_supported":["Fire Extinguisher Sales, Service & Certification","Emergency Lighting Inspection","Exit Sign Inspection","Kitchen Hood Suppression Inspection","Fire Safety Training"],"emergency_definition":["Extinguisher failed to operate during actual fire event","Kitchen suppression system discharged — post-discharge inspection required before reopening"],"emergency_routing_rules":{"primary_contact":"Raymond Torres (GM)","contact_order":["713-555-0182"],"fallback":"Voicemail to Raymond; caller told callback within the hour"},"non_emergency_routing_rules":"Collect name, number, brief reason. Confirm follow-up next business day. For Health Dept inspection panics — calm caller, take message, do not promise dates. For service lists — name and number only; tech documents during visit.","call_transfer_rules":{"timeout_seconds":30,"retries":0,"message_on_fail":"I've left Raymond a message and he will call you back within the hour. Please call 911 immediately if there is any ongoing fire danger."},"integration_constraints":["Never create anything in Wintac — office staff handles all data entry","Never quote prices for services","Do not promise inspection dates — 3–4 week booking lead time","Redirect sprinkler/alarm calls — explicitly tell caller we do not handle sprinkler or alarm systems","Fire Department calling for certification records — take name, badge number, callback; office manager calls back within one business day. Do not provide records over the phone."],"after_hours_flow_summary":"Genuine emergencies only (extinguisher failure in fire, post-discharge suppression). Direct caller to call 911 first if any ongoing danger. Collect name, number, address. Try Raymond (713-555-0182, 30s). If no answer, voicemail + assure callback within the hour. Non-emergency: collect name, number, brief description; confirm next business day follow-up.","office_hours_flow_summary":"Mon–Fri 8AM–5PM CT. Greet, ask purpose, collect name + callback number. Redirect sprinkler/alarm calls. For Health Dept panics — calm and collect. Do not promise dates or prices. Transfer to Carol or Raymond for complex queries.","questions_or_unknowns":["Carol Jenkins direct line for transfer during business hours"],"notes":"No on-call staff for non-emergencies. Houston Restaurant Group is notable account. ~20% Spanish-speaking customers — bilingual support on roadmap. No weekends."},
+      spec_version: "v2"
+    },
+    changelog: [
+      {field:"office_address",action:"added",old:null,new:"1402 Heights Boulevard, Houston TX"},
+      {field:"call_transfer_rules.timeout_seconds",action:"added",old:null,new:30},
+      {field:"call_transfer_rules.message_on_fail",action:"added",old:null,new:"Raymond callback + 911 guidance"},
+      {field:"emergency_routing_rules.contact_order",action:"added",old:"[]",new:'["713-555-0182"]'},
+      {field:"emergency_routing_rules.primary_contact",action:"added",old:null,new:"Raymond Torres (GM)"},
+      {field:"integration_constraints",action:"added",old:"[]",new:"5 constraints (Wintac, pricing, dates, sprinkler redirect, FD records)"},
+      {field:"services_supported",action:"updated",old:"5 services",new:"5 services (kitchen hood inspection + training added)"},
+      {field:"non_emergency_routing_rules",action:"updated",old:"generic",new:"detailed (Health Dept panic, service list handling)"},
+      {field:"questions_or_unknowns",action:"updated",old:"3 unknowns",new:"1 unknown (Carol's direct line)"},
+    ]
+  }
+};
+
+// ── Render ──────────────────────────────────────────────────────────────────
+let currentAccount = null;
+let currentVersion = 'v2';
+
+function renderSidebar() {
+  const sb = document.getElementById('sidebar');
+  let html = '<div class="sidebar-section">Accounts</div>';
+  Object.entries(ACCOUNTS).forEach(([id, acc]) => {
+    const changes = acc.changelog.length;
+    html += `<div class="account-item ${id === currentAccount ? 'active' : ''}" onclick="selectAccount('${id}')">
+      <div class="account-name">${acc.company}</div>
+      <div class="account-sub">
+        <span class="v-badge v1">v1</span>
+        <span class="v-badge v2">v2</span>
+        <span style="color:var(--muted)">${id} · ${changes} changes</span>
+      </div>
+    </div>`;
+  });
+  sb.innerHTML = html;
+}
+
+function selectAccount(id) {
+  currentAccount = id;
+  renderSidebar();
+  renderContent();
+}
+
+function setVersion(v) {
+  currentVersion = v;
+  renderContent();
+}
+
+function renderContent() {
+  if (!currentAccount) return;
+  const acc = ACCOUNTS[currentAccount];
+  const ver = currentVersion;
+  const memo = acc[ver].memo;
+  const c = document.getElementById('content');
+
+  const bh = memo.business_hours || {};
+  const er = memo.emergency_routing_rules || {};
+  const tr = memo.call_transfer_rules || {};
+
+  let html = `
+  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+    <div>
+      <h2 style="font-size:20px; font-weight:700;">${acc.company}</h2>
+      <div style="color:var(--muted); font-size:12px; margin-top:4px;">${currentAccount} · ${acc.industry}</div>
+    </div>
+    <div class="ver-selector">
+      <button class="ver-btn ${ver==='v1'?'active':''}" onclick="setVersion('v1')">v1 Demo</button>
+      <button class="ver-btn ${ver==='v2'?'active':''}" onclick="setVersion('v2')">v2 Onboarding</button>
+    </div>
+  </div>
+
+  <div class="summary-bar">
+    <div class="stat green"><div class="stat-num">${(memo.emergency_definition||[]).length}</div><div class="stat-label">Emergency Triggers</div></div>
+    <div class="stat blue"><div class="stat-num">${(er.contact_order||[]).length}</div><div class="stat-label">Routing Contacts</div></div>
+    <div class="stat ${(memo.questions_or_unknowns||[]).length > 0 ? 'yellow' : 'green'}"><div class="stat-num">${(memo.questions_or_unknowns||[]).length}</div><div class="stat-label">Open Questions</div></div>
+    <div class="stat"><div class="stat-num">${(memo.integration_constraints||[]).length}</div><div class="stat-label">Constraints</div></div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('overview',this)">Overview</div>
+    <div class="tab" onclick="showTab('routing',this)">Routing</div>
+    <div class="tab" onclick="showTab('prompt',this)">Agent Prompt</div>
+    <div class="tab" onclick="showTab('diff',this)">Diff v1→v2 (${acc.changelog.length} changes)</div>
+  </div>
+
+  <div id="tab-overview" class="tab-panel active">
+    <div class="grid2">
+      <div class="card">
+        <h3>Business Hours</h3>
+        <div class="field-row"><span class="field-key">Days</span><span class="field-val">${bh.days||'<null>'}</span></div>
+        <div class="field-row"><span class="field-key">Hours</span><span class="field-val">${bh.start||'<null>'} – ${bh.end||'<null>'}</span></div>
+        <div class="field-row"><span class="field-key">Timezone</span><span class="field-val">${bh.timezone||'<null>'}</span></div>
+      </div>
+      <div class="card">
+        <h3>Contact Info</h3>
+        <div class="field-row"><span class="field-key">Address</span><span class="field-val">${memo.office_address||'<not provided>'}</span></div>
+        <div class="field-row"><span class="field-key">Transfer Timeout</span><span class="field-val">${tr.timeout_seconds ? tr.timeout_seconds+'s' : '<null>'}</span></div>
+        <div class="field-row"><span class="field-key">Retries</span><span class="field-val">${tr.retries ?? '<null>'}</span></div>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Services Supported</h3>
+        <div class="tag-list">${(memo.services_supported||[]).map(s=>`<span class="tag">${s}</span>`).join('')||'<em>None</em>'}</div>
+      </div>
+      <div class="card">
+        <h3>Emergency Triggers</h3>
+        <div class="tag-list">${(memo.emergency_definition||[]).map(s=>`<span class="tag danger">${s}</span>`).join('')||'<em>None defined</em>'}</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:16px;">
+      <h3>Integration Constraints</h3>
+      ${(memo.integration_constraints||[]).length ? (memo.integration_constraints||[]).map(c=>`<div class="field-row" style="display:block; padding:6px 0;"><span style="color:#fca5a5;">⚠ ${c}</span></div>`).join('') : '<em style="color:var(--muted)">No constraints recorded</em>'}
+    </div>
+    ${(memo.questions_or_unknowns||[]).length ? `<div class="card">
+      <h3>⚠ Open Questions / Unknowns</h3>
+      <div class="tag-list">${(memo.questions_or_unknowns||[]).map(q=>`<span class="tag warn">${q}</span>`).join('')}</div>
+    </div>` : `<div class="card"><h3>✓ All Fields Resolved</h3><div style="color:var(--green);font-size:13px;">No open questions remaining after onboarding.</div></div>`}
+  </div>
+
+  <div id="tab-routing" class="tab-panel">
+    <div class="card" style="margin-bottom:16px;">
+      <h3>Emergency Escalation Chain</h3>
+      ${(er.contact_order||[]).length ? er.contact_order.map((c,i)=>`
+        <div class="field-row">
+          <span class="field-key">Step ${i+1}</span>
+          <span class="field-val" style="font-family:monospace">${c} — ${i===0 ? (er.primary_contact||'Primary') : 'Backup'}</span>
+        </div>`).join('') : '<em style="color:var(--muted)">Contact numbers not yet provided</em>'}
+      ${er.fallback ? `<div class="field-row"><span class="field-key">Fallback</span><span class="field-val" style="color:var(--yellow)">${er.fallback}</span></div>` : ''}
+    </div>
+    <div class="card" style="margin-bottom:16px;">
+      <h3>Transfer Fail Message</h3>
+      <div style="color:#cbd5e1; font-size:13px; line-height:1.6; padding:8px 0; font-style:italic;">
+        "${tr.message_on_fail || 'Not yet configured'}"
+      </div>
+    </div>
+    <div class="card">
+      <h3>Flow Summaries</h3>
+      ${memo.office_hours_flow_summary ? `<div style="margin-bottom:12px;"><div style="color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Business Hours</div><div style="font-size:13px;line-height:1.6;color:#cbd5e1;">${memo.office_hours_flow_summary}</div></div>` : ''}
+      ${memo.after_hours_flow_summary ? `<div><div style="color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">After Hours</div><div style="font-size:13px;line-height:1.6;color:#cbd5e1;">${memo.after_hours_flow_summary}</div></div>` : ''}
+    </div>
+  </div>
+
+  <div id="tab-prompt" class="tab-panel">
+    <div style="display:flex; gap:8px; margin-bottom:12px; align-items:center;">
+      <span class="tag ok">✓ Business Hours Flow</span>
+      <span class="tag ok">✓ After-Hours Flow</span>
+      <span class="tag ok">✓ Transfer Protocol</span>
+      <span class="tag ok">✓ Fallback Protocol</span>
+      <span class="tag ok">✓ No Function Call Mentions</span>
+    </div>
+    <pre id="prompt-content">Loading system prompt...</pre>
+  </div>
+
+  <div id="tab-diff" class="tab-panel">
+    ${acc.changelog.length === 0 ? '<div class="empty">No changes recorded.</div>' : `
+    <table class="diff-table">
+      <thead><tr><th>Field</th><th>Action</th><th>Before (v1)</th><th>After (v2)</th></tr></thead>
+      <tbody>
+        ${acc.changelog.map(ch=>`<tr>
+          <td><span class="field-name">${ch.field}</span></td>
+          <td><span class="diff-action action-${ch.action}">${ch.action}</span></td>
+          <td><span class="old-val">${ch.old !== null ? ch.old : '—'}</span></td>
+          <td><span class="new-val">${ch.new !== null ? ch.new : '—'}</span></td>
+        </tr>`).join('')}
+      </tbody>
+    </table>`}
+  </div>`;
+
+  c.innerHTML = html;
+
+  // Load system prompt inline
+  loadPrompt(currentAccount, ver);
+}
+
+function loadPrompt(acc, ver) {
+  const bh = ACCOUNTS[acc][ver].memo.business_hours || {};
+  const company = ACCOUNTS[acc][ver].memo.company_name;
+  const days = bh.days || 'business days';
+  const start = bh.start || 'opening time';
+  const end   = bh.end   || 'closing time';
+  const tz    = bh.timezone || 'local time';
+  const er    = ACCOUNTS[acc][ver].memo.emergency_routing_rules || {};
+  const tr    = ACCOUNTS[acc][ver].memo.call_transfer_rules || {};
+  const timeout = tr.timeout_seconds || 30;
+  const failMsg = tr.message_on_fail || 'I was unable to reach our team. Your details have been noted and someone will call you shortly.';
+  const contacts = (er.contact_order || []).join(' → ') || 'on-call team';
+  const emerg = (ACCOUNTS[acc][ver].memo.emergency_definition || []).join('; ') || 'active emergencies';
+
+  const prompt = `# Clara — AI Voice Agent for ${company}
+
+You are Clara, a professional and empathetic AI voice receptionist for ${company}.
+Never mention AI, Retell, tools, or function calls to callers.
+
+## BUSINESS HOURS FLOW
+Hours: ${days}, ${start}–${end} ${tz}
+
+### Step 1 — Greeting
+"Thank you for calling ${company}. This is Clara, how can I help you today?"
+
+### Step 2 — Understand purpose
+Listen to the caller. Ask one focused question if needed.
+
+### Step 3 — Collect caller info
+"May I get your name and the best number to reach you?"
+
+### Step 4 — Transfer
+Announce: "Let me connect you now — one moment please."
+Attempt transfer. Timeout: ${timeout} seconds.
+
+### Step 5 — If transfer fails
+"${failMsg}"
+
+### Step 6 — Anything else?
+"Is there anything else I can help you with?"
+
+### Step 7 — Close
+"Thank you for calling ${company}. Have a great day!"
+
+---
+
+## AFTER-HOURS FLOW
+
+### Step 1 — Greeting
+"Thank you for calling ${company}. Our office is currently closed. This is Clara, the after-hours assistant."
+
+### Step 2 — Ask purpose
+"Are you calling about an emergency or an urgent situation?"
+
+### Step 3 — Emergency check
+Emergencies include: ${emerg}
+
+IF EMERGENCY:
+  → "I'll connect you right away. First I need your: full name, callback number, and site address."
+  → Attempt transfer to: ${contacts} (${timeout}s each)
+  → If all fail: "${failMsg}"
+
+IF NON-EMERGENCY:
+  → "I'd be happy to help. Can you briefly describe what you need?"
+  → Collect: name, callback number, brief description
+  → "Someone will follow up with you on ${days} when we open at ${start} ${tz}."
+
+### Step 4 — Anything else?
+"Is there anything else I can help you with?"
+
+### Step 5 — Close
+"Thank you for calling ${company}. Have a good evening."
+
+---
+
+## RULES
+- Do NOT mention function calls, tools, AI, or Retell to the caller.
+- Do NOT ask more than needed. Collect only: name, number, address (if emergency).
+- Do NOT promise specific arrival times or prices.
+- If unsure, say someone will follow up — do not invent information.`;
+
+  const el = document.getElementById('prompt-content');
+  if (el) el.textContent = prompt;
+}
+
+function showTab(name, el) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  el.classList.add('active');
+  if (name === 'prompt') loadPrompt(currentAccount, currentVersion);
+}
+
+renderSidebar();
+selectAccount('account_001');
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+DEMO CALL TRANSCRIPT — ProSprinkler Solutions
+Date: 2024-11-14  |  Duration: 22 min  |  Participants: Jordan Price (Clara Sales), Kevin Okafor (ProSprinkler Owner)
+
+---
+
+JORDAN: Kevin, appreciate the time. Tell me what's driving you to look at something like Clara.
+
+KEVIN: We're a three-person shop — just me and two techs. We do sprinkler installation and repair in the Chicago suburbs. I'm on call basically 24/7 and I can't keep doing it. I need something that can answer calls when I'm on a job site and I'm not able to pick up.
+
+JORDAN: Makes sense. What kinds of calls do you get?
+
+KEVIN: Mostly new customers asking for quotes, and then emergency calls — active leaks, head activations. Those are the important ones. Also inspection scheduling, a lot of that.
+
+JORDAN: When there's an emergency, how does it typically get handled today?
+
+KEVIN: They call me, I pick up or I don't. If I don't, they call back. Sometimes I get a voicemail an hour later when I'm done with something. It's bad.
+
+JORDAN: So Clara would need to capture the emergency details and try to reach you.
+
+KEVIN: Exactly. And if I don't pick up, it should try my tech Dave. His number is in my head but I'd have to find it. I know he's 312 area code.
+
+JORDAN: No problem, we'll sort that out later. What counts as a genuine emergency in your world?
+
+KEVIN: Active water flow from a sprinkler head, visible flooding in a mechanical room, or if a head got accidentally hit — those need same-day response. Fire panel alerts from a building that's currently occupied — those too.
+
+JORDAN: And non-emergency?
+
+KEVIN: Scheduling an annual inspection, asking about a quote, general questions. Those can wait until business hours.
+
+JORDAN: What are your hours?
+
+KEVIN: Honestly I work weird hours. But let's say Monday through Friday 7am to 6pm. Central time. No physical office — I work out of my van, but mailing address is Naperville, Illinois.
+
+JORDAN: Do you use any field software?
+
+KEVIN: No, just Google Sheets. Nothing fancy.
+
+JORDAN: And after hours — is it just you and Dave, or anyone else?
+
+KEVIN: Just us two for now.
+
+JORDAN: Perfect. Let me show you the demo.
+
+[Demo interaction — 9 minutes]
+
+KEVIN: That's good. I want it to be quick — don't ask ten questions. Just get the name and number and what's happening and call me.
+
+JORDAN: That's exactly how we design it. We'll configure the exact escalation path during onboarding.
+
+---
+END OF TRANSCRIPT

@@ -1,0 +1,53 @@
+DEMO CALL TRANSCRIPT — FireGuard Protection Services
+Date: 2024-11-12  |  Duration: 28 min  |  Participants: Marcus Webb (Clara Sales), Diana Cho (FireGuard Operations Manager)
+
+---
+
+MARCUS: Diana, thanks for joining. I'd love to show you what Clara can do and hear more about your current challenges before I walk you through the demo.
+
+DIANA: Sure. So we do commercial fire suppression — sprinkler systems, fire alarms, suppression systems for kitchens and server rooms. We cover the Dallas–Fort Worth metro area. Our biggest problem right now is after-hours calls. We have a tech on call every night but we're missing calls, or the tech doesn't pick up and the customer gets voicemail, and nobody follows up until morning.
+
+MARCUS: So you'd say after-hours emergency dispatch is the core problem.
+
+DIANA: Absolutely. A sprinkler going off at 2am in a restaurant — that's a real emergency. We need Clara to triage that, get the info, and keep trying to reach someone.
+
+MARCUS: That makes sense. Can you tell me what qualifies as an emergency for your team?
+
+DIANA: Active sprinkler discharge, fire alarm activation, anything flooding or actively damaging property. Also if somebody smells smoke or reports a fire panel fault showing a live condition.
+
+MARCUS: Good. And non-emergencies?
+
+DIANA: Inspection requests, annual certification scheduling, quote requests, that sort of thing.
+
+MARCUS: When you say "keep trying to reach someone" — is there a chain of contacts? Like, try the on-call tech first, then a backup?
+
+DIANA: Yes. Our on-call dispatcher, then the lead tech, then my cell if all else fails. But I'm honestly not sure of the exact numbers right now — our scheduling rotates weekly.
+
+MARCUS: Totally fine for now. We can lock that down later. What are your business hours?
+
+DIANA: Monday through Friday. We open around 8, close at 5. Central time. We have a small office in Garland, Texas.
+
+MARCUS: Got it. Do you use ServiceTrade or any field service software?
+
+DIANA: We use ServiceTrade, yeah. But our office manager told me not to create sprinkler work orders from incoming calls — those have to go through the estimating team first.
+
+MARCUS: Good to know. Let me show you the demo agent now.
+
+[Demo interaction — 12 minutes of live demo call roleplay]
+
+MARCUS: What did you think?
+
+DIANA: I liked it. It was calm. I'd want it to say our company name properly. And I'm worried about false positives — people calling at midnight saying they "think" they might have a problem. Can it ask a clarifying question?
+
+MARCUS: Absolutely — we can configure it to ask one clarifying question before escalating. We'll fine-tune that during onboarding.
+
+DIANA: One more thing — we do have some Spanish-speaking customers. Not a lot, maybe 10%. Any way to handle that?
+
+MARCUS: We can note that as a future enhancement. The current product is English-first but that's on our roadmap.
+
+DIANA: Okay. I think we're interested. What's the next step?
+
+MARCUS: I'll send over a proposal. If you decide to move forward, we'll do a 45-minute onboarding call to nail down all the routing details.
+
+---
+END OF TRANSCRIPT

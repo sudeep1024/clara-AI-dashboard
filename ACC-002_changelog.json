@@ -1,0 +1,279 @@
+{
+  "account_id": "ACC-002",
+  "generated_at": "2026-03-04T05:28:28.979083+00:00",
+  "summary": {
+    "memo_fields_changed": 19,
+    "spec_fields_changed": 10,
+    "system_prompt_changed": true,
+    "total_changes": 30
+  },
+  "memo_changes": [
+    {
+      "path": "memo._extracted_at",
+      "type": "removed",
+      "old": "2026-03-04T05:28:28.971071+00:00",
+      "new": null
+    },
+    {
+      "path": "memo._onboarding_extracted_at",
+      "type": "added",
+      "old": null,
+      "new": "2026-03-04T05:28:28.971096+00:00"
+    },
+    {
+      "path": "memo._pipeline",
+      "type": "modified",
+      "old": "A",
+      "new": "B"
+    },
+    {
+      "path": "memo._previous_version",
+      "type": "added",
+      "old": null,
+      "new": "v1"
+    },
+    {
+      "path": "memo._source_file",
+      "type": "modified",
+      "old": "ACC-002_demo.txt",
+      "new": "ACC-002_onboarding.txt"
+    },
+    {
+      "path": "memo._version",
+      "type": "modified",
+      "old": "v1",
+      "new": "v2"
+    },
+    {
+      "path": "memo.after_hours_flow_summary",
+      "type": "modified",
+      "old": "Greet, confirm emergency, route to monitoring center, fallback to collect info.",
+      "new": "Greet, ask purpose, confirm emergency status, for emergencies transfer to monitoring center 602-555-0344 (45s) then owner 602-555-0771 (30s), if all fail direct to 911 for life-safety and give 30-min callback assurance."
+    },
+    {
+      "path": "memo.business_hours.notes",
+      "type": "modified",
+      "old": "Weekends 10:00-15:00",
+      "new": "Weekends 10:00–15:00; no DST"
+    },
+    {
+      "path": "memo.call_transfer_rules.max_attempts",
+      "type": "modified",
+      "old": null,
+      "new": 2
+    },
+    {
+      "path": "memo.call_transfer_rules.pre_transfer_message",
+      "type": "modified",
+      "old": "Let me connect you with our monitoring center.",
+      "new": "Let me connect you with our monitoring center right away."
+    },
+    {
+      "path": "memo.call_transfer_rules.timeout_seconds",
+      "type": "modified",
+      "old": null,
+      "new": 45
+    },
+    {
+      "path": "memo.call_transfer_rules.transfer_fail_message",
+      "type": "modified",
+      "old": "I was unable to reach our monitoring center. Please call back shortly.",
+      "new": "I wasn't able to reach our monitoring center. If you are in immediate danger, please call 911 now. Otherwise, leave your name and number and we will call you back within thirty minutes."
+    },
+    {
+      "path": "memo.emergency_definition",
+      "type": "modified",
+      "old": [
+        "verified alarm activation (fire)",
+        "verified alarm activation (intrusion)",
+        "verified alarm activation (CO)",
+        "customer calls in panic about active threat"
+      ],
+      "new": [
+        "verified alarm activation (fire)",
+        "verified alarm activation (intrusion)",
+        "verified alarm activation (CO)",
+        "customer reports active threat or panic",
+        "customer reports break-in in progress",
+        "customer reports smoke or visible fire at monitored property"
+      ]
+    },
+    {
+      "path": "memo.emergency_routing_rules",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "third-party monitoring center",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "third-party monitoring center (24/7)",
+          "phone": "602-555-0344",
+          "timeout_seconds": 45
+        },
+        {
+          "order": 2,
+          "contact": "owner",
+          "phone": "602-555-0771",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "memo.integration_constraints",
+      "type": "modified",
+      "old": [
+        "no automated changes to Alarm.com accounts"
+      ],
+      "new": [
+        "no automated changes to Alarm.com accounts – no write access",
+        "never discuss pricing on calls – redirect to business hours"
+      ]
+    },
+    {
+      "path": "memo.notes",
+      "type": "modified",
+      "old": "Demo call. Monitoring center number and owner cell not yet provided.",
+      "new": "Fully configured at onboarding. Arizona/Phoenix – no DST adjustment needed."
+    },
+    {
+      "path": "memo.office_address",
+      "type": "modified",
+      "old": null,
+      "new": "2201 East Camelback Road, Suite 110, Phoenix, Arizona 85016"
+    },
+    {
+      "path": "memo.office_hours_flow_summary",
+      "type": "modified",
+      "old": "Greet, collect purpose, route or take message.",
+      "new": "Greet, collect purpose, collect name and number, route or message. Do not discuss pricing."
+    },
+    {
+      "path": "memo.questions_or_unknowns",
+      "type": "modified",
+      "old": [
+        "What is the monitoring center phone number?",
+        "What is the office address?",
+        "What is the owner's direct number for escalation?"
+      ],
+      "new": []
+    }
+  ],
+  "spec_changes": [
+    {
+      "path": "spec.call_transfer_protocol.max_attempts",
+      "type": "modified",
+      "old": null,
+      "new": 2
+    },
+    {
+      "path": "spec.call_transfer_protocol.pre_transfer_message",
+      "type": "modified",
+      "old": "Let me connect you with our monitoring center.",
+      "new": "Let me connect you with our monitoring center right away."
+    },
+    {
+      "path": "spec.call_transfer_protocol.routing_order",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "third-party monitoring center",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "third-party monitoring center (24/7)",
+          "phone": "602-555-0344",
+          "timeout_seconds": 45
+        },
+        {
+          "order": 2,
+          "contact": "owner",
+          "phone": "602-555-0771",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "spec.call_transfer_protocol.timeout_seconds",
+      "type": "modified",
+      "old": null,
+      "new": 45
+    },
+    {
+      "path": "spec.fallback_protocol.message",
+      "type": "modified",
+      "old": "I was unable to reach our monitoring center. Please call back shortly.",
+      "new": "I wasn't able to reach our monitoring center. If you are in immediate danger, please call 911 now. Otherwise, leave your name and number and we will call you back within thirty minutes."
+    },
+    {
+      "path": "spec.integration_constraints",
+      "type": "modified",
+      "old": [
+        "no automated changes to Alarm.com accounts"
+      ],
+      "new": [
+        "no automated changes to Alarm.com accounts – no write access",
+        "never discuss pricing on calls – redirect to business hours"
+      ]
+    },
+    {
+      "path": "spec.key_variables.emergency_routing",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "third-party monitoring center",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "third-party monitoring center (24/7)",
+          "phone": "602-555-0344",
+          "timeout_seconds": 45
+        },
+        {
+          "order": 2,
+          "contact": "owner",
+          "phone": "602-555-0771",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "spec.key_variables.office_address",
+      "type": "modified",
+      "old": null,
+      "new": "2201 East Camelback Road, Suite 110, Phoenix, Arizona 85016"
+    },
+    {
+      "path": "spec.questions_or_unknowns",
+      "type": "modified",
+      "old": [
+        "What is the monitoring center phone number?",
+        "What is the office address?",
+        "What is the owner's direct number for escalation?"
+      ],
+      "new": []
+    },
+    {
+      "path": "spec.version",
+      "type": "modified",
+      "old": "v1",
+      "new": "v2"
+    }
+  ],
+  "system_prompt_changed": true
+}

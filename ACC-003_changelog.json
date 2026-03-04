@@ -1,0 +1,300 @@
+{
+  "account_id": "ACC-003",
+  "generated_at": "2026-03-04T05:28:28.983090+00:00",
+  "summary": {
+    "memo_fields_changed": 19,
+    "spec_fields_changed": 9,
+    "system_prompt_changed": true,
+    "total_changes": 29
+  },
+  "memo_changes": [
+    {
+      "path": "memo._extracted_at",
+      "type": "removed",
+      "old": "2026-03-04T05:28:28.971076+00:00",
+      "new": null
+    },
+    {
+      "path": "memo._onboarding_extracted_at",
+      "type": "added",
+      "old": null,
+      "new": "2026-03-04T05:28:28.971101+00:00"
+    },
+    {
+      "path": "memo._pipeline",
+      "type": "modified",
+      "old": "A",
+      "new": "B"
+    },
+    {
+      "path": "memo._previous_version",
+      "type": "added",
+      "old": null,
+      "new": "v1"
+    },
+    {
+      "path": "memo._source_file",
+      "type": "modified",
+      "old": "ACC-003_demo.txt",
+      "new": "ACC-003_onboarding.txt"
+    },
+    {
+      "path": "memo._version",
+      "type": "modified",
+      "old": "v1",
+      "new": "v2"
+    },
+    {
+      "path": "memo.after_hours_flow_summary",
+      "type": "modified",
+      "old": "Greet, triage emergency vs non-emergency, transfer for emergency, collect info for non-emergency.",
+      "new": "Greet, ask purpose, determine emergency (5 triggers), collect name/number/property address, attempt 3 transfers (dispatcher 206-555-0452 → Tom 206-555-0819 → Ray 206-555-0631, 30s each), if all fail confirm 20-min callback."
+    },
+    {
+      "path": "memo.business_hours.notes",
+      "type": "modified",
+      "old": "Closed weekends but accepts emergency calls",
+      "new": "Closed weekends but emergency calls accepted"
+    },
+    {
+      "path": "memo.call_transfer_rules.max_attempts",
+      "type": "modified",
+      "old": null,
+      "new": 3
+    },
+    {
+      "path": "memo.call_transfer_rules.timeout_seconds",
+      "type": "modified",
+      "old": null,
+      "new": 30
+    },
+    {
+      "path": "memo.call_transfer_rules.transfer_fail_message",
+      "type": "modified",
+      "old": "I was unable to reach our on-call team. A technician will call you back.",
+      "new": "I'm sorry, I wasn't able to reach our on-call team directly. Your information has been logged and a technician will call you back within twenty minutes. Is the location safe to remain at?"
+    },
+    {
+      "path": "memo.emergency_definition",
+      "type": "modified",
+      "old": [
+        "complete system failure in commercial kitchen",
+        "no heat in freezing weather",
+        "CO detector triggered"
+      ],
+      "new": [
+        "complete system failure in commercial kitchen",
+        "no heat in freezing weather",
+        "CO detector triggered",
+        "flooding from HVAC drain line or condensate overflow inside building",
+        "total cooling failure at data center or server room"
+      ]
+    },
+    {
+      "path": "memo.emergency_routing_rules",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "on-call dispatcher",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "on-call dispatcher",
+          "phone": "206-555-0452",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 2,
+          "contact": "service manager",
+          "phone": "206-555-0819",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 3,
+          "contact": "backup technician",
+          "phone": "206-555-0631",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "memo.integration_constraints",
+      "type": "modified",
+      "old": [
+        "do not create jobs in ServiceTitan without human review"
+      ],
+      "new": [
+        "do not auto-create jobs in ServiceTitan – dispatcher review required"
+      ]
+    },
+    {
+      "path": "memo.non_emergency_routing_rules.collect_fields",
+      "type": "modified",
+      "old": [
+        "name",
+        "phone",
+        "description"
+      ],
+      "new": [
+        "name",
+        "phone",
+        "property_address",
+        "description"
+      ]
+    },
+    {
+      "path": "memo.notes",
+      "type": "modified",
+      "old": "Demo call. On-call number and exact routing not yet confirmed.",
+      "new": "Three-level emergency routing confirmed. 20-min callback window."
+    },
+    {
+      "path": "memo.office_address",
+      "type": "modified",
+      "old": null,
+      "new": "8300 Aurora Avenue North, Suite 200, Seattle, Washington 98103"
+    },
+    {
+      "path": "memo.office_hours_flow_summary",
+      "type": "modified",
+      "old": "Greet, understand purpose, collect name and number, route or take message.",
+      "new": "Greet, collect purpose, collect name and number, route or take message. No quotes or pricing on calls."
+    },
+    {
+      "path": "memo.questions_or_unknowns",
+      "type": "modified",
+      "old": [
+        "What is the dispatcher on-call number?",
+        "What is the office address?",
+        "How many transfer attempts before fallback?"
+      ],
+      "new": [
+        "Spanish language support – flagged for future"
+      ]
+    }
+  ],
+  "spec_changes": [
+    {
+      "path": "spec.call_transfer_protocol.max_attempts",
+      "type": "modified",
+      "old": null,
+      "new": 3
+    },
+    {
+      "path": "spec.call_transfer_protocol.routing_order",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "on-call dispatcher",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "on-call dispatcher",
+          "phone": "206-555-0452",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 2,
+          "contact": "service manager",
+          "phone": "206-555-0819",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 3,
+          "contact": "backup technician",
+          "phone": "206-555-0631",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "spec.call_transfer_protocol.timeout_seconds",
+      "type": "modified",
+      "old": null,
+      "new": 30
+    },
+    {
+      "path": "spec.fallback_protocol.message",
+      "type": "modified",
+      "old": "I was unable to reach our on-call team. A technician will call you back.",
+      "new": "I'm sorry, I wasn't able to reach our on-call team directly. Your information has been logged and a technician will call you back within twenty minutes. Is the location safe to remain at?"
+    },
+    {
+      "path": "spec.integration_constraints",
+      "type": "modified",
+      "old": [
+        "do not create jobs in ServiceTitan without human review"
+      ],
+      "new": [
+        "do not auto-create jobs in ServiceTitan – dispatcher review required"
+      ]
+    },
+    {
+      "path": "spec.key_variables.emergency_routing",
+      "type": "modified",
+      "old": [
+        {
+          "order": 1,
+          "contact": "on-call dispatcher",
+          "phone": null,
+          "timeout_seconds": null
+        }
+      ],
+      "new": [
+        {
+          "order": 1,
+          "contact": "on-call dispatcher",
+          "phone": "206-555-0452",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 2,
+          "contact": "service manager",
+          "phone": "206-555-0819",
+          "timeout_seconds": 30
+        },
+        {
+          "order": 3,
+          "contact": "backup technician",
+          "phone": "206-555-0631",
+          "timeout_seconds": 30
+        }
+      ]
+    },
+    {
+      "path": "spec.key_variables.office_address",
+      "type": "modified",
+      "old": null,
+      "new": "8300 Aurora Avenue North, Suite 200, Seattle, Washington 98103"
+    },
+    {
+      "path": "spec.questions_or_unknowns",
+      "type": "modified",
+      "old": [
+        "What is the dispatcher on-call number?",
+        "What is the office address?",
+        "How many transfer attempts before fallback?"
+      ],
+      "new": [
+        "Spanish language support – flagged for future"
+      ]
+    },
+    {
+      "path": "spec.version",
+      "type": "modified",
+      "old": "v1",
+      "new": "v2"
+    }
+  ],
+  "system_prompt_changed": true
+}

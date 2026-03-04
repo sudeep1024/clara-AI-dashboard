@@ -1,0 +1,71 @@
+ONBOARDING CALL TRANSCRIPT — SafetyFirst Fire & Safety
+Date: 2024-12-11  |  Duration: 36 min  |  Participants: Lisa Cheng (Clara Onboarding), Raymond Torres (General Manager), Carol Jenkins (Office Manager)
+
+---
+
+LISA: Raymond, Carol — let's confirm all your configuration details. Starting with hours.
+
+RAYMOND: Monday through Friday, 8am to 5pm Central. No weekends, no holidays.
+
+LISA: Address?
+
+CAROL: 1402 Heights Boulevard, Houston, Texas 77008.
+
+LISA: Services?
+
+RAYMOND: Fire extinguisher sales, service, and annual certification. Emergency lighting and exit sign inspection. Kitchen hood suppression system inspection. Fire safety training. We do not do sprinkler systems or alarm panels — if someone calls about those, tell them we don't handle that and they should contact a licensed sprinkler or alarm contractor.
+
+LISA: That's important — so Clara should explicitly redirect sprinkler and alarm calls?
+
+RAYMOND: Yes. We get those calls and it wastes everyone's time.
+
+LISA: Emergency definition?
+
+RAYMOND: We discussed this in the demo — it's rare for us. A fire extinguisher that failed to operate during an actual fire event. A kitchen suppression system that discharged and needs immediate inspection before the restaurant can reopen — that's a Health Department requirement.
+
+CAROL: Also if a customer calls and says they have a fire inspection tomorrow morning and they just realized they haven't had their equipment serviced. That's urgent but not life-safety. Raymond, do we handle those after hours?
+
+RAYMOND: No. Those we handle next business day. Tell them to document they tried to reach us.
+
+LISA: So for after-hours: true emergency is extinguisher failure in a fire, or post-discharge suppression inspection. Everything else is next business day.
+
+RAYMOND: Correct.
+
+LISA: Emergency routing?
+
+RAYMOND: No after-hours staff for regular calls. For a genuine fire-related emergency: tell the caller to call 911 immediately if there's any ongoing danger. Then take their name, number, and address and tell them I'll call them back within the hour. My cell is 713-555-0182.
+
+LISA: So Clara calls you directly?
+
+RAYMOND: Yes. 30-second timeout. If I don't answer, leave a voicemail and tell the caller I'll call within the hour.
+
+CAROL: And if it's really a fire in progress — remind them 911 is the right call, not us. We service equipment; we don't respond to active fires.
+
+LISA: Absolutely. I'll add explicit 911 guidance. Non-emergency after hours?
+
+CAROL: Name, number, brief reason. Standard callback next business day. We don't promise same-day for non-emergencies.
+
+LISA: Wintac constraints?
+
+CAROL: Never create anything in Wintac from a call. I handle all data entry. Also, never quote prices — we get callers asking how much for a 5-gallon extinguisher service. Take their info and we'll quote them.
+
+RAYMOND: And don't promise inspection dates. We book 3 to 4 weeks out and I don't want Clara promising we'll be there in two days.
+
+LISA: Noted. Any special accounts or VIP callers?
+
+RAYMOND: We have a contract with Houston Restaurant Group — they have 22 locations. Any call from them should be flagged but still same routing. They know our process.
+
+CAROL: Also, we occasionally get calls from the Houston Fire Department about certification records. Clara should take their name, badge number, and number and tell them our office manager will call back within one business day. Don't give out any records over the phone.
+
+LISA: Important safety note — confirmed. Any languages other than English?
+
+RAYMOND: We have Spanish-speaking customers, maybe 20% of our base. If available, we'd love bilingual, but English-only for now is fine.
+
+LISA: Any other constraints?
+
+CAROL: I think that's it. Keep calls short — if someone starts listing every extinguisher they have, cut them off politely and tell them to email the list or our tech will document it during the visit.
+
+LISA: Perfect guidance. You'll have your v2 within 24 hours.
+
+---
+END OF TRANSCRIPT
