@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=claraadmin
+      - N8N_HOST=0.0.0.0
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+      - WEBHOOK_URL=http://localhost:5678
+      # Mount your pipeline env vars here too:
+      - LLM_PROVIDER=${LLM_PROVIDER:-gemini}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - GROQ_API_KEY=${GROQ_API_KEY:-}
+      - GOOGLE_SHEET_ID=${GOOGLE_SHEET_ID:-}
+    volumes:
+      # Persist n8n data
+      - n8n_data:/home/node/.n8n
+      # Mount the Clara pipeline codebase into the container
+      - .:/app
+    working_dir: /app
+
+  # Optional: local Python worker (if you want to run scripts via n8n Execute Command)
+  pipeline:
+    image: python:3.11-slim
+    working_dir: /app
+    volumes:
+      - .:/app
+    env_file: .env
+    command: >
+      sh -c "pip install -r requirements.txt -q && tail -f /dev/null"
+    restart: unless-stopped
+
+volumes:
+  n8n_data:

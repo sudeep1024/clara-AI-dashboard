@@ -1,0 +1,11 @@
+# ── LLM Provider (choose ONE based on your LLM_PROVIDER env var) ──────────────
+# Option 1 – Google Gemini free tier (recommended)
+google-generativeai>=0.7.0
+
+# Option 2 – Groq free tier
+# groq>=0.9.0
+
+# Option 3 – Ollama (local, fully free) — no package needed, uses stdlib urllib
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+python-dotenv>=1.0.0    # load .env file
